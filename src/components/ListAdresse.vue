@@ -1,10 +1,12 @@
 <template>
 <div class="panel mt-5" id="list-adresse" v-if="getAdresses.length">
-    <div class="panel-heading level">
+    <div class="panel-heading">
         <h3 class="subtitle level-item">
             Adresses enregistrées
         </h3>
-        <button  @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+        <div class="level-right">
+            <button class="button is-small" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+        </div>
     </div>
     
     <div class="panel-block" v-for="adresse in getAdresses" :key="adresse.id" :adresse="adresse">
