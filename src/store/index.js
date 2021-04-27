@@ -21,6 +21,7 @@ async function getCoo(text) {
   const reponse = await axios.get(`https://api.torop.net/cartographie/geocode?adresse=${text}`)
   return reponse.data
 }
+
 function addCooToAdresse(lat, lng, adresse) {
   adresse.lat = lat
   adresse.lng = lng
