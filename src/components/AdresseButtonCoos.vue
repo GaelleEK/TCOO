@@ -1,7 +1,9 @@
 <template>
     <div>
         <slot name="showCoo" v-if="adresse.lat && adresse.lng">{{ adresse.lat }} / {{ adresse.lng }}</slot>
+
         <slot name="loading" v-if="loading"><progress class="progress is-small is-dark"></progress></slot>
+
         <slot name="default" v-if="!adresse.lat">
             <button class="button" @click="() => updateAdresseCoos(this.adresse)">
                 Demander coordonnées
@@ -22,7 +24,7 @@ export default {
     inject:['adresse'],
     methods: {
         updateAdresseCoos() {
-            console.log(this.adresse, 'buttonadresse')
+            //console.log(this.adresse, 'buttonadresse')
             this.$store.dispatch('updateAdresses', this.adresse)
         }
     }
