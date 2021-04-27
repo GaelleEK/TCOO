@@ -14,7 +14,7 @@
             </div>
 
             <div class="tile is-child" v-else>
-                <adresse-button-coos></adresse-button-coos>
+                <adresse-button-coos/>
             </div>
 
             <div class="level-right">

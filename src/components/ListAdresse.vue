@@ -5,7 +5,10 @@
             Adresses enregistrées
         </h3>
         <div class="level-right">
-            <button class="button is-small" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+            <div class="buttons are-small">
+                <adresse-button-file/>
+                <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+            </div>
         </div>
     </div>
     
@@ -18,12 +21,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import AdresseButtonFile from './AdresseButtonFile.vue'
 import BaseAdresse from './BaseAdresse.vue'
 
 export default {
   name: 'ListAdresse',
   components: {
-    BaseAdresse
+    BaseAdresse,
+    AdresseButtonFile
   },
     data() {
         return {

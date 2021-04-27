@@ -1,9 +1,15 @@
 <template>
-    <div class=" is-fluid">
+    <div class="hero p-5 is-fluid">
+
         <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>
-        <input-adresse />
-        <upload-adresses />
-        <list-adresse />
+        
+        <div class="hero-body">
+            
+            <input-adresse />
+            <upload-adresses />
+            <list-adresse />
+
+        </div>
         
     </div>
 </template>

@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <div class="hero">
     <Navigation/>
     <Footer />
   </div>
 </template>
 
 <script>
-import Footer from './components/Footer.vue'
+import Footer from './views/Footer.vue'
 import Navigation from './components/Nav.vue'
 
 export default {
