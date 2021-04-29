@@ -1,5 +1,5 @@
 <template>
-    <div class="block">
+    <div class="section is-large">
         <div class="box">
             <h1 class="title is-2">Connexion</h1>
             

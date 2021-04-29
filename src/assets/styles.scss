@@ -4,14 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
 
-
-$family-sans-serif: 'Lato'; 
-$family-code: 'Roboto';
-$title-family: 'Lato';
-$title-color: #0000ff;
-$button-family: 'Montserrat';
 $blue: #0000ff;
 $red: #cc3300;
+$grey: #848484;
 $custom-colors: (
     "blue": $blue,
     // "bluelight": #4d4dff,
@@ -19,8 +14,21 @@ $custom-colors: (
     // "green": #679436,
     // "greenlight": #a4bd01,
     "red": $red,
+    "grey": $grey
 );
 
+$family-sans-serif: 'Lato'; 
+$family-code: 'Roboto';
+
+$title-family: 'Lato';
+$title-color: #0000ff;
+
+$button-family: 'Montserrat';
+
+$footer-background-color: $grey;
+
+    
+$background-body: $grey;
 
 
 @import "../node_modules/bulma/bulma.sass";

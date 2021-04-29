@@ -1,6 +1,6 @@
 <template>
 <!-- <div id="nav"> -->
-    <nav class="navbar is-transparent" >
+    <nav class="navbar is-grey" >
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
                 H<img src="../assets/compass1.svg">ME

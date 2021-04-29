@@ -35,7 +35,7 @@ export default {
         size: 0.9,
         color: 0xb31254,
         color2: 0x1f36e6,
-        backgroundColor: 0xffffff
+        backgroundColor: 0x848484
     })
   },
   beforeDestroy() {
