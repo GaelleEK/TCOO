@@ -1,29 +1,42 @@
 <template>
-<div id="nav">
-    <nav class="navbar pb-4">
-        <div class="navbar-menu">
+<!-- <div id="nav"> -->
+    <nav class="navbar is-transparent" >
+        <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
-                <p class="level-item">H<img src="../assets/compass1.svg">ME</p>
+                H<img src="../assets/compass1.svg">ME
             </router-link> 
-
-            <div class="navbar-item">
-                <router-link to="/about" class="navbar-item" exact-path>About</router-link> 
+            <div id="logout" class="navbar-item is-hidden-desktop">
+                <router-link to="/" class="button is-small is-outlined is-blue" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
+                <a role="button" :class="navbarBurger" @click="toggleMenu" >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
             </div>
-
-            <div class="navbar-item">
-                <router-link to="/adresse" exact-active-path replace>Adresse</router-link>
+        </div>
+        <div :class="navbarMenu">
+            <div class="navbar-start">
+                <div class="navbar-item" @click="toggleMenu">
+                    <router-link to="/adresse" class="navbar-item" exact-active-path replace>Adresse</router-link>
+                </div>
+                <div class="navbar-item" @click="toggleMenu">
+                    <router-link to="/about" class="navbar-item" exact-path>About</router-link> 
+                </div>
             </div>
-
-            <div class="navbar-item navbar-end">
-                <button  class="button is-small is-outlined " v-if="isAuthenticated" @click="logout">Logout</button>
+            <div class="navbar-end is-hidden-touch">
+                <div class="navbar-item">
+                    <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                    <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
+                </div>
             </div>
         </div>
     </nav>
         <!-- <p>route courante: {{ $route.name }}</p>
         <p>localStorage auth : {{ localStorage }}</p>
         <p>isAuthenticated : {{ isAuthenticated }}</p> -->
-        <router-view class="container has-text-centered"/>
-</div>
+        
+<!-- </div> -->
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -33,19 +46,38 @@ export default {
         return {
             errorMessage: '',
             localStorage: localStorage.getItem('auth'),
+            navbarBurger: {
+                'navbar-burger': true,
+                'is-active': false
+            },
+            navbarMenu: {
+                'navbar-menu': true,
+                'is-active': false
+            }
         }
     },
     methods: {
         logout() {
             this.$store.dispatch("setAuthenticated", false)
             localStorage.setItem('auth', false)
+        },
+        toggleMenu() {
+            if(!this.navbarBurger['is-active'] && !this.navbarMenu['is-active']) {
+                this.navbarBurger['is-active'] = true
+                this.navbarMenu['is-active'] = true
+            } else {
+                this.navbarBurger['is-active'] = false
+                this.navbarMenu['is-active'] = false
+            }
         }
     },
     computed: {
         ...mapGetters(['isAuthenticated']),
-    } 
+    }
 }
 </script>
 <style lang="scss">
-
+div#logout {
+    margin-left: auto;
+}
 </style>

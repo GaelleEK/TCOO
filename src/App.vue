@@ -1,7 +1,12 @@
 <template>
-  <div class="hero">
+  <div>
+
     <Navigation/>
+
+    <router-view :key="localStorage" class="has-text-centered"/>
+
     <Footer />
+
   </div>
 </template>
 
@@ -11,7 +16,17 @@ import Navigation from './components/Nav.vue'
 
 export default {
   name: "ProjectGps",
-  components: { Navigation, Footer }
+  components: { Navigation, Footer },
+  data() {
+    return {
+      localStorage: localStorage.getItem('auth')
+    }
+  }
 }
 </script>
+<style lang="scss">
+
+  @import "./assets/styles.scss";
+
+</style>
 

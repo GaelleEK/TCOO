@@ -1,0 +1,26 @@
+@charset "utf-8";
+@import "../node_modules/bulma/sass/utilities/functions.sass";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
+
+
+$family-sans-serif: 'Lato'; 
+$family-code: 'Roboto';
+$title-family: 'Lato';
+$title-color: #0000ff;
+$button-family: 'Montserrat';
+$blue: #0000ff;
+$red: #cc3300;
+$custom-colors: (
+    "blue": $blue,
+    // "bluelight": #4d4dff,
+    // "whiteblue": #ebf2fa,
+    // "green": #679436,
+    // "greenlight": #a4bd01,
+    "red": $red,
+);
+
+
+
+@import "../node_modules/bulma/bulma.sass";

@@ -1,6 +1,15 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <div>
+      <h1 class="title">A la découverte du géocode ...</h1>
+      <p>
+        Cette application vous permet de récupérer les coordonnées GPS que vous souhaitez.
+      </p>
+    </div>
+    
+    
+
+
   </div>
 </template>
 

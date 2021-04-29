@@ -1,8 +1,8 @@
 <template>
     <div class="footer">
-        <p class="content has-text-centered">
-            made with &hearts; 
-        </p>
+        <div class="content has-text-centered">
+            <p>made with &hearts;</p>
+        </div>
     </div>
 </template>
 <script>

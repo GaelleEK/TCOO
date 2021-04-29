@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="button" @click='csvExport(csvData)'>Extraire coordonnées</button>
+        <button class="button" @click="csvExport(csvData)">Extraire coordonnées</button>
     </div>
 </template>
 
@@ -27,7 +27,6 @@ export default {
             link.setAttribute('href', data)
             link.setAttribute('download', 'export.csv')
             link.click()
-        
             //console.log(csvContent)
         }
     },
