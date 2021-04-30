@@ -1,5 +1,5 @@
 <template>
-    <div class="hero p-5 is-fluid">
+    <div class="hero p-5 is-fluid has-text-centered">
 
         <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>
         

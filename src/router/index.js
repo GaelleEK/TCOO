@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../components/Login.vue'
 import Adresse from '../components/Adresse.vue'
+import ProjectGps from '../App.vue'
 import store from '../store/index'
 
 
@@ -11,8 +12,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'home',
+    component: Home,
   },
   {
     path: '/test',
@@ -22,13 +23,13 @@ const routes = [
   {
     path: '/adresse',
     name: 'Adresse',
-    component: Adresse,
+    component: () => import(/* webpackChunkName: "adresse" */ '../components/Adresse.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: () => import(/* webpackChunkName: "login" */ '../components/Login.vue')
     
   },
   {

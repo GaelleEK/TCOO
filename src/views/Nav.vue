@@ -1,6 +1,6 @@
 <template>
 <!-- <div id="nav"> -->
-    <nav class="navbar" >
+    <nav class="navbar is-transparent" >
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
                 H<img src="../assets/compass1.svg">ME
@@ -52,6 +52,7 @@ export default {
             },
             navbarMenu: {
                 'navbar-menu': true,
+                'has-background-transparent': true,
                 'is-active': false
             }
         }
@@ -77,7 +78,5 @@ export default {
 }
 </script>
 <style lang="scss">
-div#logout {
-    margin-left: auto;
-}
+
 </style>

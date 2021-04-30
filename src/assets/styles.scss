@@ -17,22 +17,21 @@ $blue: #0000ff;
 $red: #b31254;
 $grey: #848484;
 $grey-invert: #cdcdcd;
+$grey-light: #a4a4a4;
 $grey-darker: #696969;
+$grey-dark: #4a4a4a;
 $blue-light: findColorInvert($blue);
 $transparent: #11ffee00;
 $custom-colors: (
     "blue": $blue,
     "bluelight": $blue-light,
-    // "whiteblue": #ebf2fa,
-    // "green": #679436,
-    // "greenlight": #a4bd01,
     "red": $red,
     "grey": $grey,
     "grey-invert": $grey-invert,
     "transparent": $transparent
 );
 $title-color: $red;
-
+$text: $grey-dark;
 $link-active: $grey-invert;
 $link: $grey-invert;
 $link-hover-border: $grey-darker;
@@ -43,11 +42,8 @@ $link-focus-border: $grey-invert;
 
 $family-primary: 'Zen Dots';
 $family-secondary: 'Lato';
-
-
 $family-sans-serif: 'Lato'; 
 $family-code: 'Roboto';
-
 $title-line-height: 1.6;
 
 ///////////////////////
@@ -55,7 +51,7 @@ $title-line-height: 1.6;
 ///////////////////// 
 
 $scheme-main: $grey;
-$scheme-invert: $grey-darker;
+$scheme-invert: $grey-light;
 $link-active: $grey-invert;
 
 $navbar-background-color: $grey;
@@ -68,5 +64,14 @@ $footer-background-color: $grey;
 
 $box-shadow: 0 0.5em 3em -0.125em rgba($scheme-invert, 0.2), 0 0px 0 3px rgba($scheme-invert, 0.03);
 
+// Place le bouton login/logout à droite de la navbar
+div#logout {
+    margin-left: auto;
+}
+.vanta-class {
+    width: 100vw;
+    height: 100vh;
+    position: inherit;
+}
 
 @import "../node_modules/bulma/bulma.sass";

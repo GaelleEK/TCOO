@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footer is-fixed-bottom  is-transparent">
         <div class="content has-text-centered">
             <p>made with &hearts;</p>
         </div>

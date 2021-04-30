@@ -1,31 +1,71 @@
 <template>
-  <div>
+  <div id="app">
+    <Navigation class="is-fixed-top"/>
 
-    <Navigation/>
+    
+    <div class="hero-body">
+      <router-view />
+    </div>
 
-    <router-view :key="localStorage" class="has-text-centered"/>
-
-    <Footer />
-
+    <div id="vanta" ref="vantaRef"></div>
+    <Footer class="is-fixed-bottom"/>
   </div>
 </template>
 
 <script>
-import Footer from './views/Footer.vue'
-import Navigation from './components/Nav.vue'
+import GLOBE from 'vanta/src/vanta.globe'
+const Footer = () => import(/*webpackChunkName: "group-footer" */ './views/Footer.vue')
+const Navigation = () => import(/*webpackChunkName: "group-footer" */ './views/Nav.vue')
+
+const screenWidth = window.screen.width
+const screenHeight = window.screen.height
+
 
 export default {
-  name: "ProjectGps",
+  name: "App",
   components: { Navigation, Footer },
   data() {
-    return {
+   return {
       localStorage: localStorage.getItem('auth')
     }
+  },
+  mounted() {
+    this.vantaEffect = GLOBE({
+    el: '#vanta',
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: screenHeight,
+        minWidth: screenWidth,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        size: 0.9,
+        color: 0xb31254,
+        color2: 0x1f36e6,
+        backgroundColor: 0x848484,
+        showDots: false
+    })
+  },
+  beforeDestroy() {
+      if (this.vantaEffect) {
+      this.vantaEffect.destroy()
+      }
   }
 }
 </script>
 <style lang="scss">
 
+// .hero-body {
+//   z-index: 3;
+// }
+
+
+  div#vanta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
   @import "./assets/styles.scss";
 
 </style>
