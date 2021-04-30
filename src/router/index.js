@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../components/Login.vue'
-import Adresse from '../components/Adresse.vue'
-import ProjectGps from '../App.vue'
 import store from '../store/index'
 
 
@@ -29,7 +26,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../components/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
     
   },
   {
