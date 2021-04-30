@@ -2,10 +2,10 @@
   <div>
     <div class="hero is-large">
       <div ref="vantaRef" class="hero-body">
-        <div class="box has-text-red">
+        <div class="box has-background-transparent">
           <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>
           <h2 class="subtitle">Bienvenue dans le monde des coordonnées GPS</h2>
-          <div class="button">
+          <div class="button is-outlined">
             <router-link to="/about">En savoir plus</router-link>
           </div>
         </div>

@@ -1,12 +1,12 @@
 <template>
 <!-- <div id="nav"> -->
-    <nav class="navbar is-grey" >
+    <nav class="navbar" >
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
                 H<img src="../assets/compass1.svg">ME
             </router-link> 
             <div id="logout" class="navbar-item is-hidden-desktop">
-                <router-link to="/" class="button is-small is-outlined is-blue" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>
                 <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
                 <a role="button" :class="navbarBurger" @click="toggleMenu" >
                     <span aria-hidden="true"></span>
@@ -17,11 +17,11 @@
         </div>
         <div :class="navbarMenu">
             <div class="navbar-start">
-                <div class="navbar-item" @click="toggleMenu">
-                    <router-link to="/adresse" class="navbar-item" exact-active-path replace>Adresse</router-link>
+                <div class="navbar-item">
+                    <router-link to="/adresse" @click="toggleMenu" exact-active-path replace>Adresse</router-link>
                 </div>
-                <div class="navbar-item" @click="toggleMenu">
-                    <router-link to="/about" class="navbar-item" exact-path>About</router-link> 
+                <div class="navbar-item">
+                    <router-link to="/about" @click="toggleMenu" exact-path>About</router-link> 
                 </div>
             </div>
             <div class="navbar-end is-hidden-touch">

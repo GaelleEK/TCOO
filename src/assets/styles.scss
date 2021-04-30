@@ -3,32 +3,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+
+
+
+$body-line-height: 2;
+
+//////////////////////
+//      colors     //
+//////////////////// 
 
 $blue: #0000ff;
-$red: #cc3300;
+$red: #b31254;
 $grey: #848484;
+$grey-invert: #cdcdcd;
+$grey-darker: #696969;
+$blue-light: findColorInvert($blue);
+$transparent: #11ffee00;
 $custom-colors: (
     "blue": $blue,
-    // "bluelight": #4d4dff,
+    "bluelight": $blue-light,
     // "whiteblue": #ebf2fa,
     // "green": #679436,
     // "greenlight": #a4bd01,
     "red": $red,
-    "grey": $grey
+    "grey": $grey,
+    "grey-invert": $grey-invert,
+    "transparent": $transparent
 );
+$title-color: $red;
+
+$link-active: $grey-invert;
+$link: $grey-invert;
+$link-hover-border: $grey-darker;
+$link-focus-border: $grey-invert;
+//////////////////////
+//      fonts      //
+//////////////////// 
+
+$family-primary: 'Zen Dots';
+$family-secondary: 'Lato';
+
 
 $family-sans-serif: 'Lato'; 
 $family-code: 'Roboto';
 
-$title-family: 'Lato';
-$title-color: #0000ff;
+$title-line-height: 1.6;
 
-$button-family: 'Montserrat';
+///////////////////////
+//  backgrounds     //
+///////////////////// 
 
+$scheme-main: $grey;
+$scheme-invert: $grey-darker;
+$link-active: $grey-invert;
+
+$navbar-background-color: $grey;
+$background-body: $grey;
 $footer-background-color: $grey;
 
-    
-$background-body: $grey;
+///////////////////////
+//  shadows         //
+/////////////////////
+
+$box-shadow: 0 0.5em 3em -0.125em rgba($scheme-invert, 0.2), 0 0px 0 3px rgba($scheme-invert, 0.03);
 
 
 @import "../node_modules/bulma/bulma.sass";
