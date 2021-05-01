@@ -1,6 +1,6 @@
 <template>
 <div class="panel mt-5" id="list-adresse" v-if="getAdresses.length">
-    <div class="panel-heading">
+    <div class="panel-heading has-background-transparent">
         <h3 class="subtitle level-item">
             Adresses enregistrées
         </h3>

@@ -1,6 +1,6 @@
 <template>
 <!-- <div id="nav"> -->
-    <nav class="navbar is-transparent" >
+    <nav :class="navbarStyle" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
                 H<img src="../assets/compass1.svg">ME
@@ -13,9 +13,11 @@
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
+                
             </div>
         </div>
         <div :class="navbarMenu">
+    
             <div class="navbar-start">
                 <div class="navbar-item">
                     <router-link to="/adresse" @click="toggleMenu" exact-active-path replace>Adresse</router-link>
@@ -30,6 +32,7 @@
                     <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
                 </div>
             </div>
+        
         </div>
     </nav>
         <!-- <p>route courante: {{ $route.name }}</p>
@@ -47,13 +50,22 @@ export default {
             errorMessage: '',
             localStorage: localStorage.getItem('auth'),
             navbarBurger: {
+                 //aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"
+                 'aria-label': 'menu',
+                 'aria-expanded': false,
+                 'data-target': '',
                 'navbar-burger': true,
-                'is-active': false
+                'is-active': false,
             },
             navbarMenu: {
                 'navbar-menu': true,
                 'has-background-transparent': true,
                 'is-active': false
+            },
+            navbarStyle: {
+                'navbar': true,
+                'is-transparent': true,
+                'is-fixed-top': true
             }
         }
     },
@@ -65,7 +77,10 @@ export default {
         toggleMenu() {
             if(!this.navbarBurger['is-active'] && !this.navbarMenu['is-active']) {
                 this.navbarBurger['is-active'] = true
+                this.navbarBurger['aria-expanded'] = true
                 this.navbarMenu['is-active'] = true
+                this.navbarStyle['is-fixed-top'] = false
+                
             } else {
                 this.navbarBurger['is-active'] = false
                 this.navbarMenu['is-active'] = false

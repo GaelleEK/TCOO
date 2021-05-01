@@ -1,5 +1,5 @@
 <template>
-  <div id="adresse" class="container is-fluid">
+  <div id="adresse" class="container is-fluid has-text-centered">
     <div class="box">
       <h1 class="title is-1 is-spaced">Mes adresses</h1>
       <p class="text pb-5">Entrez une adresse valide, c'est à dire un nom de rue et un nom de ville au minimum</p>
@@ -12,43 +12,42 @@
             <button class="button" @click="() => addAdresse(this.getAdresses)">Enregistrer</button>
         </div>
       </div>
-
       <upload-adresses/>
-
       <div>
     </div>
     </div>  
-    <div v-if="getAdresses.length">
+    <div v-if="getAdresses.length" class="container">
       <h3 class="title is-4 pt-3">Mes adresses enregistrées</h3>
-      <table class="table">
-        <tr>
-          <th>#</th>
-          <th>Adresses</th>
-          <th>Actions</th>
-          <th>
-            <p>Coordonnées</p>
-            <button class="button is-small" @click="getAllCoos" >Pour toutes les adresses</button>
-          </th>
-        </tr>
-        <tr v-for="adresse in getAdresses" :key="adresse.id">
-          <td>{{ adresse.id }}</td>
-          <td>{{ adresse.text }}</td>
-          <td>
-            <div class="buttons are-small">
-              <button class="button" @click="() => deleteAdresse(adresse)">Effacer</button>
-              <button :class="classObjet" @click="() => queryCoo(adresse)">Demander coordonnées</button>
-            </div>
-          </td>
-          <td>
-            <div v-if="!loading && adresse.lat && adresse.lng" >
-              <p>lat: {{ adresse.lat }}</p>
-              <p>lng: {{ adresse.lng }}</p>
-            </div>
-            <div v-else><progress class="progress is-small is-dark"></progress></div>
-
-          </td>
-        </tr>
-      </table>
+      <div class="content is-centered">
+        <table class="table">
+          <tr>
+            <th>#</th>
+            <th>Adresses</th>
+            <th>Actions</th>
+            <th>
+              <p>Coordonnées</p>
+              <button class="button is-small" @click="getAllCoos" >Pour toutes les adresses</button>
+            </th>
+          </tr>
+          <tr v-for="adresse in getAdresses" :key="adresse.id">
+            <td>{{ adresse.id }}</td>
+            <td>{{ adresse.text }}</td>
+            <td>
+              <div class="buttons are-small">
+                <button class="button" @click="() => deleteAdresse(adresse)">Effacer</button>
+                <button :class="classObjet" @click="() => queryCoo(adresse)">Demander coordonnées</button>
+              </div>
+            </td>
+            <td>
+              <div v-if="!loading && adresse.lat && adresse.lng" >
+                <p>lat: {{ adresse.lat }}</p>
+                <p>lng: {{ adresse.lng }}</p>
+              </div>
+              <div v-else><progress class="progress is-small is-dark"></progress></div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </template>

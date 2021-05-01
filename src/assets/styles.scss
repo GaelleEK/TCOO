@@ -7,6 +7,74 @@
 
 
 
+// Test button
+
+  
+%test {
+position: absolute;
+content: '';
+transition: all .5s;
+}
+  
+$colorFontButton: #0000ff;
+$colorButtonCustom: #b31254;
+
+.buttontest { 
+    display: inline-block; 
+    padding: 20px 40px;
+    color: $colorFontButton;
+    position: relative;
+    top: 10vh;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    vertical-align: middle;
+    //font-family: 'Rubik One', sans-serif;
+    text-decoration: none;
+    font-size: 2vw;
+    transition: all .5s;
+    background-color: $colorButtonCustom;
+
+    &::before {
+    @extend %test;
+        bottom: -15px;
+        height: 15px;
+        width: 100%;
+        left: 8px;
+        transform: skewX(45deg);
+        background-color: darken($colorButtonCustom, 20%);
+    }
+
+    &::after {
+        @extend %test;
+        right: -15px;
+        height: 100%;
+        width: 15px;
+        bottom: -8px;
+        transform: skewY(45deg);
+        background-color: darken($colorButtonCustom, 30%);
+    }
+
+    &:active {
+        margin-left: 10px;
+        margin-top: 10px;
+        &::before {
+            bottom: -5px;
+            height: 5px;
+            left: 3px;
+        }
+        
+    &::after {
+            right: -5px;
+            width: 5px;
+            bottom: -3px;
+        }	
+    }
+}
+
+
+
+
+/////////////////////////////// test button en haut
 $body-line-height: 2;
 
 //////////////////////
@@ -30,8 +98,14 @@ $custom-colors: (
     "grey-invert": $grey-invert,
     "transparent": $transparent
 );
+
+
 $title-color: $red;
 $text: $grey-dark;
+$button-color: $blue;
+
+
+
 $link-active: $grey-invert;
 $link: $grey-invert;
 $link-hover-border: $grey-darker;
@@ -74,6 +148,18 @@ div#logout {
     width: 100vw;
     height: 100vh;
     position: inherit;
+}
+
+div#app {
+    min-height: 100vh;
+}
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+html, body {
+   // overflow-y: hidden !important;
 }
 
 @import "../node_modules/bulma/bulma.sass";

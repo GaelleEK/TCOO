@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <Navigation class="is-fixed-top"/>
+    <Navigation/>
 
     
     <div class="hero-body">
       <router-view />
     </div>
 
-    <div id="vanta" ref="vantaRef"></div>
-    <Footer class="is-fixed-bottom"/>
+    <div id="vanta" ref="vantaRef" class="container is-fluid"></div>
+    <Footer/>
   </div>
 </template>
 
@@ -35,8 +35,8 @@ export default {
         mouseControls: true,
         touchControls: true,
         gyroControls: false,
-        minHeight: screenHeight,
-        minWidth: screenWidth,
+        minHeight: 300,
+        minWidth: 300,
         scale: 1.00,
         scaleMobile: 1.00,
         size: 0.9,
@@ -65,6 +65,7 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
+    height: 100%;
   }
   @import "./assets/styles.scss";
 

@@ -6,7 +6,7 @@
             <p class="level-left">{{ adresse.id }}</p>
 
             <div class="tile is-child">
-                <p class="level-item">{{ adresse.text }}</p>
+                <p class="level-item has-text-weight-bold">{{ adresse.text }}</p>
             </div>
 
             <div class="tile is-child" :key="adresse.id" v-if="adresse.lat && adresse.lng">
