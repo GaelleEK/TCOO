@@ -3,9 +3,10 @@
     <Navigation/>
 
     
-    <section id="content" class="container is-fluid">
-      <router-view />
-    </section>
+      <section id="content" class="container is-fluid">
+        <router-view />
+      </section>
+    
 
     <div id="vanta" ref="vantaRef" class="container is-fluid"></div>
     <Footer/>
@@ -55,13 +56,9 @@ export default {
 </script>
 <style lang="scss">
 
-// .hero-body {
-//   z-index: 3;
-// }
+@import "./assets/styles.scss";
 
 
-  
-  @import "./assets/styles.scss";
 
 </style>
 

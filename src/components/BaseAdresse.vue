@@ -1,5 +1,5 @@
 <template>
-    <section class="tile is-ancestor box" :key="adresse.id" :adresse="adresse">
+    <section class="tile is-ancestor box has-background-grey-light" :key="adresse.id" :adresse="adresse">
        
         <div class="tile is-parent level">
             
@@ -18,7 +18,7 @@
             </div>
 
             <div class="level-right">
-                <button class="delete has-background-grey" :adresse="adresse" @click="deleteAdresse"></button>
+                <button class="delete has-background-white" :adresse="adresse" @click="deleteAdresse"></button>
             </div>
             
             

@@ -66,7 +66,7 @@ export default new Vuex.Store({
             state.adresses.push(adresse)
           } else {
             //console.log('adresse invalide')
-            let error = { type: 'adresse invalide', item}
+            let error = { type: 'adresse invalide', item }
             state.errors.push(error)
           }
         }

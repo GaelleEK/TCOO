@@ -1,4 +1,5 @@
 <template>
+
   <div class="section">
     <div class="has-background-transparent">
       <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>

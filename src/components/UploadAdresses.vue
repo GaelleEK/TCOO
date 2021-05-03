@@ -4,7 +4,7 @@
         <div class="field has-addons has-addons-centered pb-5">
             <form class="file has-name">
                 <label class="file-label">
-                    <input class="file-input" id='file' ref='filesList' type="file" @change="handleFileUpload">
+                    <input class="file-input has-background-grey-light" id='file' ref='filesList' type="file" @change="handleFileUpload">
                     <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -13,31 +13,34 @@
                             Choisissez un fichier
                         </span>
                     </span>
-                    <span v-bind:class="placeholderSpan">
-                        {{ placeholderSpan.text }}
+                    <span :class="placeholderInputFileAdresse">
+                        {{ placeholderInputFileAdresse.text }}
                     </span>
                 </label>
             </form>
                 
         </div>
         <div class="control">
-            <p class="help is-danger mt-4" v-if="error" >{{ error }}</p>
+            
+                <p class="help is-danger mt-4" v-if="error" >{{ error }}</p>
+            
             <button class="button" @click="submitFile">Enregistrer</button>
         </div>
         <!-- Affichage des adresses non-enregistrées car doublon ou vide -->
         <div class="message help is-danger mt-4" v-if="getErrors.length">
-            <div class="message-header">
-                <p>
-                    Liste des adresses invalides : 
-                </p>
-                <button class="delete is-small" @click="deleteErrors"></button>
-                
-            </div>
-            <div v-for="error in getErrors" :key="error.id" >
-                <p class="message-body">
+            <transition name="bounce" duration="800" appear>
+                <div class="message-header">
+                    <p>
+                        Liste des adresses invalides : 
+                    </p>
+                    <button class="delete is-small" @click="deleteErrors"></button>
+                </div>
+            </transition>
+            <transition-group name="slice" key="getErrors.error" appear>
+                <div v-for="error in getErrors" :key="error.item">
                     {{ error.item }}
-                </p>
-            </div>
+                </div>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -54,15 +57,11 @@ export default {
             filesList: {},
             file: '',
             target: null,
-            error: '',
-            classPhSpan: {
-                text: 'Ex : 10 grande rue Frotey lès Vesoul',
-                'disabled': true,
-                'file-name': true
-            }
+            error: ''
         }
     },
     methods: {
+      
         handleFileUpload() {
             
             this.error = ''
@@ -128,16 +127,17 @@ export default {
         }
     },
     computed: {
-        placeholderSpan() {
+        placeholderInputFileAdresse() {
             if (this.file != '') {
                 return {
                     text: this.file.name,
-                    'file-name': true
+                    'file-name': true,
+                    'has-background-grey-light': true,
                     } 
             } else {
                 return {
-                    text: 'Ex : 10 grande rue Frotey lès Vesoul',
-                    'has-text-grey-light': true,
+                    text: 'Ex : fichier.txt',
+                    'has-background-grey-light': true,
                     'file-name': true,
                 }
             }
@@ -147,3 +147,4 @@ export default {
     }
 }
 </script>
+

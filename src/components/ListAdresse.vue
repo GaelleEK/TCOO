@@ -1,21 +1,23 @@
 <template>
-<div class="panel mt-5" id="list-adresse" v-if="getAdresses.length">
-    <div class="panel-heading has-background-transparent">
-        <h3 class="subtitle level-item">
-            Adresses enregistrées
-        </h3>
-        <div class="level-right">
-            <div class="buttons are-small">
-                <adresse-button-file/>
-                <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
-            </div>
+<div class="panel mt-5" v-if="getAdresses.length">
+    <transition name="bounce" appear>
+      <div class="panel-heading has-background-grey-invert">
+          <h3 class="subtitle level-item">
+              Adresses enregistrées
+          </h3>
+          <div class="level-right">
+              <div class="buttons are-small">
+                  <adresse-button-file/>
+                  <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+              </div>
+          </div>
+      </div>
+    </transition>
+    <transition-group name="slice" key="adresse" appear>
+        <div class="panel-block has-background-grey-light" v-for="adresse in getAdresses" :key="adresse.id" :adresse="adresse">
+            <base-adresse :key="adresse.id" :adresse="adresse"/>
         </div>
-    </div>
-    
-    <div class="panel-block" v-for="adresse in getAdresses" :key="adresse.id" :adresse="adresse">
-        <base-adresse :key="adresse.id" :adresse="adresse"/>
-    </div>
-    
+    </transition-group>
 </div>
 </template>
 
@@ -32,8 +34,7 @@ export default {
   },
     data() {
         return {
-            result: null,
-            reponse:null
+            
         }
     },
     methods: {
@@ -42,7 +43,8 @@ export default {
         },
         updateAdressesCoos() {
             this.$store.dispatch('updateAdresses')
-        }
+        },
+        
     },
     computed: {
     ...mapGetters(["getAdresses"])
@@ -50,3 +52,8 @@ export default {
 }
 
 </script>
+<style lang="scss">
+
+
+
+</style>

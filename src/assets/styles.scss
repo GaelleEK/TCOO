@@ -95,7 +95,8 @@ $custom-colors: (
     "red": $red,
     "grey": $grey,
     "grey-invert": $grey-invert,
-    "transparent": $transparent
+    "transparent": $transparent,
+    "grey-light": $grey-light
 );
 
 
@@ -103,6 +104,7 @@ $title-color: $red;
 $text: $grey-dark;
 $button-color: $blue;
 
+$input-placeholder-color: $grey-dark;
 
 
 $link-active: $grey-invert;
@@ -186,6 +188,46 @@ div#vanta {
     height: 90%;
 }
 
-
+// span#logo {
+//    // margin: auto;
+    
+// }
+// transitions file: list adresse
+@keyframes bounce-in {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  //apparition entete liste et error
+  .bounce-enter {
+    animation: bounce-in .5s;
+  }
+  .bounce-enter-active {
+      animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+      animation: bounce-in .5s reverse;
+  }
+   .bounce-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+  //apparition item adresse
+  .slice-enter-active {
+    transition: all .5s ease;
+  }
+  .slice-leave-active {
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slice-enter, .slice-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
 
 @import "../node_modules/bulma/bulma.sass";

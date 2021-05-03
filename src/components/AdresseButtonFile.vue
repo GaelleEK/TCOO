@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <button class="button" @click="csvExport(csvData)">Extraire coordonnées</button>
-    </div>
+    
+    <button class="button" @click="csvExport(csvData)">Extraire coordonnées</button>
+    
 </template>
 
 <script>
