@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slot name="showCoo" v-if="adresse.lat && adresse.lng">{{ adresse.lat }} / {{ adresse.lng }}</slot>
+        <slot name="showCoo" v-if="adresse.lat && adresse.lng">{{ tweenedLat }} / {{ adresse.lng }}</slot>
 
         <slot name="loading" v-if="loading"><progress class="progress is-small is-dark"></progress></slot>
 
@@ -17,7 +17,8 @@ export default {
     name: 'AdresseButtonCoos',
     data() {
         return {
-            loading: false
+            loading: false,
+            tweenedLat: 0
         }
     },
     // PROVIDE: pour recevoir des propriétés spécifiques que nous avons listé dans composant parent
@@ -30,3 +31,6 @@ export default {
     }
 }
 </script>
+
+<style>
+</style>

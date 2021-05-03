@@ -36,8 +36,11 @@
                     <button class="delete is-small" @click="deleteErrors"></button>
                 </div>
             </transition>
-            <transition-group name="slice" key="getErrors.error" appear>
-                <div v-for="error in getErrors" :key="error.item">
+            <transition-group name="slice" appear>
+                <!-- index+0 dans key permet de supprimer le warning dans la console -->
+                <!-- Module Warning (from ./node_modules/vue-loader/lib/loaders/templateLoader.js):
+(Emitted value instead of an instance of Error) Do not use v-for index as key on <transition-group> children, this is the same as not using keys. -->
+                <div v-for="(error, index) in getErrors" :key="index+0">
                     {{ error.item }}
                 </div>
             </transition-group>
@@ -46,6 +49,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from "vuex"
 export default {
     name: 'UploadAdresses',
@@ -144,6 +148,15 @@ export default {
         },
         ...mapGetters(["getAdresses", "getErrors"]),
 
+    },
+    watch: {
+        getErrors() {
+            if(this.getErrors.length > 0) {
+                setTimeout(function() {
+                    this.deleteErrors()
+                }.bind(this), 3000);
+            }
+        }
     }
 }
 </script>
