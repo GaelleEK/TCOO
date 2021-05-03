@@ -3,7 +3,7 @@
     <nav :class="navbarStyle" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
-                H<img src="../assets/compass1.svg">ME
+                GEOC<span id="logo"><img src="../assets/logo.svg" class="icon"></span>DE
             </router-link> 
             <div id="logout" class="navbar-item is-hidden-desktop">
                 <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>

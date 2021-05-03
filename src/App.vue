@@ -3,9 +3,9 @@
     <Navigation/>
 
     
-    <div class="hero-body">
+    <section id="content" class="container is-fluid">
       <router-view />
-    </div>
+    </section>
 
     <div id="vanta" ref="vantaRef" class="container is-fluid"></div>
     <Footer/>
@@ -60,13 +60,7 @@ export default {
 // }
 
 
-  div#vanta {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    height: 100%;
-  }
+  
   @import "./assets/styles.scss";
 
 </style>
