@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 
 Vue.use(Vuex)
 
@@ -30,11 +30,11 @@ function addCooToAdresse(lat, lng, adresse) {
 
 
 export default new Vuex.Store({
-  name: 'storeApp',
+  name: 'store',
   state: {
     adresses: [],
     authenticated: false,
-    errors: [],
+    errors: []
   },
   getters: {
     getAdresses: state => {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
     isAuthenticated: state => {
       return state.authenticated
     },
-    getErrors: state => {
+    getErrors: state =>  {
       return state.errors
     }
   },

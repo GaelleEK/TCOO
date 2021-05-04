@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <div class="box">
+        <div class="box has-background-grey-light">
             <h1 class="title is-2">Connexion</h1>
             
             <div class="field">

@@ -1,11 +1,11 @@
 <template>
-  <div class="section is-large">
+  <div class="section">
     <div class="about">
       <h1 class="title">A la découverte du géocode ...</h1>
       <p class="text has-text-grey-invert">
         Cette application vous permet de récupérer les coordonnées GPS que vous souhaitez.
       </p>
-      <p class="content has-text-centered pt-5"></p>
+      <p class="content has-text-centered"></p>
       <div class="level">
         <div class="level-item box has-background-white has-text-centered">
           <div class="">

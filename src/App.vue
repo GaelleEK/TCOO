@@ -3,7 +3,7 @@
     <Navigation/>
 
     
-      <section id="content" class="container is-fluid">
+      <section id="content" class="container">
         <router-view />
       </section>
     
@@ -55,10 +55,7 @@ export default {
 }
 </script>
 <style lang="scss">
-
-@import "./assets/styles.scss";
-
-
-
+  @import "./assets/styles.scss";
+  
 </style>
 

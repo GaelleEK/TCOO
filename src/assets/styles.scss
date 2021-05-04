@@ -5,35 +5,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 
-
+@import "/home/stagiaire1/code/coo-gps/project-gps/node_modules/vue2-animate/src/sass/vue2-animate.scss";
 
 // Test button
 
   
 %test {
-position: absolute;
-content: '';
-transition: all .5s;
+  position: absolute;
+  content: '';
+  transition: all .5s;
 }
   
 $colorFontButton: #0000ff;
-$colorButtonCustom: #b31254;
+$colorButtonCustom: #a4a4a4;
 
 .buttontest { 
     display: inline-block; 
     padding: 10px 20px;
     color: $colorFontButton;
     position: relative;
-    top: 10vh;
+    //top: 10vh;
     left: 15%;
-    transform: translate(-50%, -50%);
+    //transform: translate(-50%, -50%);
     vertical-align: middle;
     text-decoration: none;
-    font-size: 2vw;
+    font-size: 100%;
     transition: all .5s;
     background-color: $colorButtonCustom;
 
-    &::before {
+    &:before {
     @extend %test;
         bottom: -15px;
         height: 15px;
@@ -53,7 +53,7 @@ $colorButtonCustom: #b31254;
         background-color: darken($colorButtonCustom, 30%);
     }
 
-    &:active {
+    &:hover {
         margin-left: 10px;
         margin-top: 10px;
         &::before {
@@ -153,19 +153,19 @@ div#logout {
 
 // positionne le canva en background
 .vanta-class {
-    width: 90vw;
+    width: 100%;
     height: 90vh;
     position: inherit;
 }
 
 div#app {
-    min-height: 90vh;
+    min-height: 100vh;
     box-sizing: border-box;
-    padding-top: 3.25em;
+    //padding-top: 3.25em;
 }
 
-.footer {
-    position: relative;
+footer {
+    //position: relative;
     bottom: 0;
     width: 100%;
     max-height: fit-content;
@@ -176,7 +176,7 @@ html, body {
    min-width: 80vw;
 }
 section#content {
-    height: 100%;
+    height: 85vh;
     padding-top: 9em;
     padding-bottom: 8em;
 }
@@ -186,48 +186,45 @@ div#vanta {
     left: 0;
     z-index: -1;
     height: 90%;
+    width: 100%;
 }
 
 // span#logo {
 //    // margin: auto;
     
-// }
-// transitions file: list adresse
-@keyframes bounce-in {
-    0% {
-      transform: scale(0);
-    }
-    50% {
-      transform: scale(1.5);
-    }
-    100% {
-      transform: scale(1);
-    }
+.btn-wrapper{
+  position: fixed;
+  top: calc(50% - 22px);
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.btn{
+  display: inline-block;
+  box-shadow: none;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  height: 45px;
+  line-height: 42px;
+  padding: 0 30px;
+  font-size: 20px;
+  border-radius: 30px;
+  color: rgb(40, 45, 50);
+  cursor: pointer;
+  transition: all .5s;
+  transition-timing-function: cubic-bezier(.2, 3, .4, 1);
+  user-select: none;
+  
+  &:hover{
+    transform: scale(1.1, 1.1);
   }
-  //apparition entete liste et error
-  .bounce-enter {
-    animation: bounce-in .5s;
+  
+  &:active{
+    transform: scale(1.05, 1.05);
   }
-  .bounce-enter-active {
-      animation: bounce-in .5s;
-  }
-  .bounce-leave-active {
-      animation: bounce-in .5s reverse;
-  }
-   .bounce-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
-  }
-  //apparition item adresse
-  .slice-enter-active {
-    transition: all .5s ease;
-  }
-  .slice-leave-active {
-    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  }
-  .slice-enter, .slice-leave-to {
-    transform: translateX(20px);
-    opacity: 0;
-  }
+}
+    
 
 @import "../node_modules/bulma/bulma.sass";

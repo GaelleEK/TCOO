@@ -1,6 +1,8 @@
 <template>
     <div>
-        <slot name="showCoo" v-if="adresse.lat && adresse.lng">{{ tweenedLat }} / {{ adresse.lng }}</slot>
+        <slot name="showCoo" v-if="adresse.lat && adresse.lng">
+            {{ adresse.lng | formatLatLng }} / {{ adresse.lng | formatLatLng }}
+        </slot>
 
         <slot name="loading" v-if="loading"><progress class="progress is-small is-dark"></progress></slot>
 
@@ -18,7 +20,6 @@ export default {
     data() {
         return {
             loading: false,
-            tweenedLat: 0
         }
     },
     // PROVIDE: pour recevoir des propriétés spécifiques que nous avons listé dans composant parent
@@ -27,6 +28,13 @@ export default {
         updateAdresseCoos() {
             //console.log(this.adresse, 'buttonadresse')
             this.$store.dispatch('updateAdresses', this.adresse)
+        }
+    },
+    filters: {
+        formatLatLng: function(value) {
+            if(!value) return null
+            value = Number(value)
+            return (value).toFixed(4) 
         }
     }
 }

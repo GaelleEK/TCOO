@@ -10,19 +10,20 @@
             </div>
 
             <div class="tile is-child" :key="adresse.id" v-if="adresse.lat && adresse.lng">
-                <p class="level-item">{{ adresse.lat | formatLatLng }}/{{ adresse.lng | formatLatLng }}</p>
+                <!-- <p class="level-item">{{ adresse.lat | formatLatLng }}/{{ adresse.lng | formatLatLng }}</p> -->
+                <adresse-button-coos><slot name="showCoo"></slot></adresse-button-coos>
             </div>
 
             <div class="tile is-child" v-else>
-                <adresse-button-coos/>
+                <adresse-button-coos><slot name="default"></slot></adresse-button-coos>
             </div>
 
             <div class="level-right">
                 <button class="delete has-background-white" :adresse="adresse" @click="deleteAdresse"></button>
             </div>
             
-            
         </div>
+        
     </section>
 </template>
 
@@ -52,12 +53,6 @@ export default {
             this.$store.dispatch("deleteAdresse", this.adresse)
         },
     },
-    filters: {
-        formatLatLng: function(value) {
-            if(!value) return null
-            value = Number(value)
-            return (value).toFixed(4) 
-        }
-    }
+   
 }
 </script>

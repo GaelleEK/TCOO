@@ -1,19 +1,30 @@
 <template>
 <div class="panel mt-5" v-if="getAdresses.length">
-    <transition name="bounce" appear>
-      <div class="panel-heading has-background-grey-invert">
-          <h3 class="subtitle level-item">
-              Adresses enregistrées
-          </h3>
-          <div class="level-right">
-              <div class="buttons are-small">
-                  <adresse-button-file/>
-                  <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
-              </div>
-          </div>
-      </div>
+    <transition 
+     enter-active-class="bounceIn"
+     leave-active-class="bounceOut"
+     appear
+    >
+        <div class="panel-heading has-background-grey-invert">
+            <h3 class="subtitle level-item">
+                Adresses enregistrées
+            </h3>
+            <div class="level-right">
+                <div class="buttons are-small">
+                    <adresse-button-file/>
+                    <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+                </div>
+            </div>
+        </div>
     </transition>
-    <transition-group name="slice" key="adresse" appear>
+    <transition-group 
+        enter-to-class="bounceInLeft"
+        enter-active-class="bounceInLeft"
+        leave-active-class="bounceOutRight"
+        leave-to-class="bounceOutRight" 
+        key="adresse"
+        appear
+    >
         <div class="panel-block has-background-grey-light" v-for="adresse in getAdresses" :key="adresse.id" :adresse="adresse">
             <base-adresse :key="adresse.id" :adresse="adresse"/>
         </div>

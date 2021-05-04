@@ -5,7 +5,7 @@
       <p class="text pb-5">Entrez une adresse valide, c'est à dire un nom de rue et un nom de ville au minimum</p>
       <div class="field">
           <div class="control has-addons has-addons-centered pb-3">
-            <input type="text" class="input" v-model="newAdresse" @change="addAdresse" @keyup.enter="addAdresse" placeholder="Ex: 10 rue Georges Genoux Vesoul">
+            <input type="text" class="input has-background-grey-light" v-model="newAdresse" @change="addAdresse" @keyup.enter="addAdresse" placeholder="Ex: 10 rue Georges Genoux Vesoul">
           </div>
           <div class="control">
             <p class="help is-danger" v-if="alert">{{ alert }}</p>
