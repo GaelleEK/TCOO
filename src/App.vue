@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navigation/>
+    <Navigation v-scroll="handleScroll"/>
 
     
       <section id="content" class="container">
@@ -30,6 +30,20 @@ export default {
       localStorage: localStorage.getItem('auth')
     }
   },
+  methods: {
+    handleScroll: function (evt, el) {
+      if (window.scrollTop > el.scrollTop) {
+        el.removeAttribute('is-fixed-top')
+        el.setAttribute('class', 'anime')
+
+        console.log('event: ', evt)
+        console.log('el: ', el)
+        // el.style.top = '0'
+      } else {
+        // el.style.top = '-3em'
+      }
+    }
+  },
   mounted() {
     this.vantaEffect = GLOBE({
     el: '#vanta',
@@ -51,7 +65,19 @@ export default {
       if (this.vantaEffect) {
       this.vantaEffect.destroy()
       }
-  }
+  },
+  directives: {
+        scroll: {
+            mounted: (el, binding) => {
+                let f = function (evt) {
+                if (binding.value(evt, el)) {
+                    window.removeEventListener('scroll', f)
+                }
+            }
+            window.addEventListener('scroll', f)
+            }
+        }   
+    }
 }
 </script>
 <style lang="scss">

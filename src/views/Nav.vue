@@ -1,6 +1,6 @@
 <template>
 <!-- <div id="nav"> -->
-    <nav :class="navbarStyle" role="navigation" aria-label="main navigation">
+    <nav id="nav" :class="navbarStyle" role="navigation" aria-label="main navigation" v-scroll="handleScroll">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
                 <span>GEOC<span id="logo"><img src="../assets/logo.svg" class="icon is-small"></span>DE</span>
@@ -50,10 +50,9 @@ export default {
             errorMessage: '',
             localStorage: localStorage.getItem('auth'),
             navbarBurger: {
-                 //aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"
-                 'aria-label': 'menu',
-                 'aria-expanded': false,
-                 'data-target': '',
+                'aria-label': 'menu',
+                'aria-expanded': false,
+                'data-target': '',
                 'navbar-burger': true,
                 'is-active': false,
             },
@@ -85,10 +84,48 @@ export default {
                 this.navbarBurger['is-active'] = false
                 this.navbarMenu['is-active'] = false
             }
+        },
+        handleScroll() {
+            
+            let scrollSurPage = window.scrollY != 0 
+            let scrollHautPage = window.scrollY > 1 && window.scrollY < 10
+            let scrollBasPage = window.scrollY > 10 && window.scrollY < 20
+
+            if (scrollSurPage && scrollBasPage) {
+                //console.log(window.clientY)
+                this.navbarStyle = {
+                    'navbar': true,
+                    'is-transparent': true,
+                    'is-fixed-top': true,
+                    'slideOutUp': true
+                }
+            } 
+            if(scrollSurPage && scrollHautPage) {
+                this.navbarStyle = {
+                    'navbar': true,
+                    'is-transparent': true,
+                    'is-fixed-top': false,
+                    'slideInUp': true
+                }  
+            }
         }
     },
     computed: {
         ...mapGetters(['isAuthenticated']),
+    },
+    directives: {
+        scroll: {
+            inserted(el, binding) {
+                let f = function (evt) {
+                if (binding.value(evt, el)) {
+                    let x = evt.clientX
+                    let y = evt.clientY
+                    window.removeEventListener('scroll', f)
+                }
+            }
+            window.addEventListener('scroll', f)
+            }
+        }   
     }
 }
 </script>

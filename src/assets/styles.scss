@@ -225,6 +225,10 @@ div#vanta {
     transform: scale(1.05, 1.05);
   }
 }
-    
+ .anime {
+  animation: slide;
+  animation-duration: 5s;
+  
+}
 
 @import "../node_modules/bulma/bulma.sass";
