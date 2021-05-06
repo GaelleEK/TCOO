@@ -6,8 +6,16 @@
       <h2 class="subtitle">Bienvenue dans le monde des coordonnées GPS</h2>
       <div class="level">
         <div class="level-item my-5">
-          <router-link to="/about" class="pushable"><span class="front">En savoir plus</span></router-link>
+          <particle-effect-button
+            :visible.sync="btnOps.visible"
+            :animating.sync="btnOps.animating"
+            :options="btnOps"
+            cls="a-cls"
+          >
+            En savoir plus
+          </particle-effect-button>
         </div>
+        
       </div>
     </div>
   </section>
@@ -15,9 +23,39 @@
 </template>
 
 <script>
-
+import ParticleEffectButton from "vue-particle-effect-buttons"
 export default {
   name: 'Home',
- 
+  components: {
+    ParticleEffectButton
+  },
+  data() {
+    return {
+      btnOps: {
+        type: "triangle",
+        easing: "easeOutQuart",
+        size: 4,
+        particlesAmountCoefficient: 4,
+        oscillationCoefficient: 2,
+        color: function () {
+          return  "#b31254";
+        },
+        onComplete: () => {
+          //console.log("complete");
+          if (this.btnOps.visible === false) {
+              this.$router.push({ path: '/about'})
+            }
+        },
+        onBegin: () => {
+          //console.log("begin");
+        },
+        visible: true,
+        animating: true,
+      },
+    }
+  },
+  methods: {
+    
+  }
 }
 </script>
