@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <Navigation v-scroll="handleScroll"/>
+    <Navigation/>
 
     
-      <section id="content" class="container">
-        <router-view />
-      </section>
+    <transition :name="transitionName" mode="out-in">
+      <router-view id="content" class="container"/>
+    </transition> 
     
 
     <div id="vanta" ref="vantaRef" class="container is-fluid"></div>
@@ -18,31 +18,21 @@ import GLOBE from 'vanta/src/vanta.globe'
 const Footer = () => import(/*webpackChunkName: "group-footer" */ './views/Footer.vue')
 const Navigation = () => import(/*webpackChunkName: "group-footer" */ './views/Nav.vue')
 
-const screenWidth = window.screen.width
-const screenHeight = window.screen.height
-
 
 export default {
   name: "App",
   components: { Navigation, Footer },
   data() {
    return {
-      localStorage: localStorage.getItem('auth')
+      localStorage: localStorage.getItem('auth'),
+      transitionName: 'slideRight'
     }
   },
-  methods: {
-    handleScroll: function (evt, el) {
-      if (window.scrollTop > el.scrollTop) {
-        el.removeAttribute('is-fixed-top')
-        el.setAttribute('class', 'anime')
-
-        console.log('event: ', evt)
-        console.log('el: ', el)
-        // el.style.top = '0'
-      } else {
-        // el.style.top = '-3em'
-      }
-    }
+  beforeRouteUpdate (to, from, next) {
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    this.transitionName = toDepth < fromDepth ? 'slideRight' : 'slideLeft'
+    next()
   },
   mounted() {
     this.vantaEffect = GLOBE({
@@ -66,18 +56,7 @@ export default {
       this.vantaEffect.destroy()
       }
   },
-  directives: {
-        scroll: {
-            mounted: (el, binding) => {
-                let f = function (evt) {
-                if (binding.value(evt, el)) {
-                    window.removeEventListener('scroll', f)
-                }
-            }
-            window.addEventListener('scroll', f)
-            }
-        }   
-    }
+  
 }
 </script>
 <style lang="scss">

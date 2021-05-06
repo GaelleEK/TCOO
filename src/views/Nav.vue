@@ -3,7 +3,7 @@
     <nav id="nav" :class="navbarStyle" role="navigation" aria-label="main navigation" v-scroll="handleScroll">
         <div class="navbar-brand">
             <router-link class="navbar-item" to="/">
-                <span>GEOC<span id="logo"><img src="../assets/logo.svg" class="icon is-small"></span>DE</span>
+                <a id="logo">GEOC<span><img src="../assets/logo.svg" class="icon is-small"></span>DE</a>
             </router-link> 
             <div id="logout" class="navbar-item is-hidden-desktop">
                 <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>
@@ -86,13 +86,7 @@ export default {
             }
         },
         handleScroll() {
-            
-            let scrollSurPage = window.scrollY != 0 
-            let scrollHautPage = window.scrollY > 1 && window.scrollY < 10
-            let scrollBasPage = window.scrollY > 10 && window.scrollY < 20
-
-            if (scrollSurPage && scrollBasPage) {
-                //console.log(window.clientY)
+            if (window.scrollY > 10) {
                 this.navbarStyle = {
                     'navbar': true,
                     'is-transparent': true,
@@ -100,7 +94,7 @@ export default {
                     'slideOutUp': true
                 }
             } 
-            if(scrollSurPage && scrollHautPage) {
+            if(window.scrollY < 20) {
                 this.navbarStyle = {
                     'navbar': true,
                     'is-transparent': true,
@@ -118,8 +112,6 @@ export default {
             inserted(el, binding) {
                 let f = function (evt) {
                 if (binding.value(evt, el)) {
-                    let x = evt.clientX
-                    let y = evt.clientY
                     window.removeEventListener('scroll', f)
                 }
             }
