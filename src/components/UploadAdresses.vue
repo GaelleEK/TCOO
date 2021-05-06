@@ -13,7 +13,7 @@
             type="file"
             @change="handleFileUpload"
           />
-          <span class="file-cta">
+          <span class="file-cta has-background-grey-invert">
             <span class="file-icon">
               <i class="fas fa-upload"></i>
             </span>

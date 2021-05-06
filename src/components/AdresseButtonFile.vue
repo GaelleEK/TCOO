@@ -1,6 +1,6 @@
 <template>
     
-    <button class="button" @click="csvExport(csvData)">Extraire coordonnées</button>
+    <button class="button has-background-grey-light" @click="csvExport(csvData)">Extraire coordonnées</button>
     
 </template>
 

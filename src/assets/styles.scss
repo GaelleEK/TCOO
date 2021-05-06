@@ -253,7 +253,7 @@ $colorButtonCustom: $red;
     @extend .slideInRight;
 }
 .slideRight-leave-active {
-    @extend .slideInLeft;
+    @extend .slideOutLeft;
 }
 
 
@@ -262,7 +262,7 @@ $colorButtonCustom: $red;
     @extend .slideInLeft;
 }
 .slideLeft-leave-active {
-    @extend .slideInRight;
+    @extend .slideOutRight;
 }
 
 /////////////////////////////// test button en haut

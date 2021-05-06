@@ -12,7 +12,7 @@
             <div class="level-right">
                 <div class="buttons are-small">
                     <adresse-button-file/>
-                    <button class="button" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
+                    <button class="button has-background-grey-light" @click="updateAdressesCoos">Demander toutes les coordonnées</button>
                 </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ export default {
   beforeRouteUpdate (to, from, next) {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
-    this.transitionName = toDepth < fromDepth ? 'slideRight' : 'slideLeft'
+    this.transitionName = toDepth < fromDepth ? 'slideLeft' : 'slideRight'
     next()
   },
   mounted() {
