@@ -1,5 +1,5 @@
 <template>
-  <div class="section">
+  <div class="section is-medium">
     <div class="about">
       <h1 class="title">A la découverte du géocode ...</h1>
       <p class="text has-text-grey-invert">

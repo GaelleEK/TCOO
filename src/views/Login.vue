@@ -1,30 +1,32 @@
 <template>
-    <div class="section">
-        <div class="box has-background-grey-light">
-            <h1 class="title is-2">Connexion</h1>
-            
-            <div class="field">
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="text" name="username" v-model="input.username" placeholder="Entrez votre nom">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
-                    </span>
+    <section class="section is-medium">
+        <div class="container">
+            <div class="box has-background-grey-light">
+                <h1 class="title is-2">Connexion</h1>
+                
+                <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" name="username" v-model="input.username" placeholder="Entrez votre nom" v-focus>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <div class="control has-icons-left has-icons-right">
-                    <input type="password" class="input" name="password" v-model="input.password" placeholder="Entrez votre mot de passe" @keyup.enter="login">
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-lock"></i>
-                    </span>
+                <div class="field">
+                    <div class="control has-icons-left has-icons-right">
+                        <input type="password" class="input" name="password" v-model="input.password" placeholder="Entrez votre mot de passe" @keyup.enter="login">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="field">
-                <button type="button" class="button is-light" @click="login">Login</button>
-                <p v-if="errorMessage" class="help is-danger">{{ errorMessage }}</p>
+                <div class="field">
+                    <button type="button" class="button is-light" @click="login">Login</button>
+                    <p v-if="errorMessage" class="help is-danger">{{ errorMessage }}</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -67,6 +69,14 @@ export default {
             }
         }
         
+    },
+    directives: {
+        // permet de mettre le focus sur input name a l arrivée sur la page
+        focus: {
+            inserted(el) {
+                el.focus()
+            }
+        }
     }
 }
 </script>

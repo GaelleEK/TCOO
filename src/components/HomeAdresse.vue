@@ -1,16 +1,18 @@
 <template>
-    <div class="hero p-5 has-text-centered">
+    <section class="section is-medium">
+        <div class="hero has-text-centered">
+            <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>
+            
+            <div class="hero-body">
+                <input-adresse />
+                <upload-adresses />
+                <list-adresse />
 
-        <h1 class="title">GEOC<span><img src="../assets/logo.svg" class="icon"></span>DE</h1>
-        
-        <div class="hero-body">
-            <input-adresse />
-            <upload-adresses />
-            <list-adresse />
+            </div>
 
         </div>
     
-    </div>
+    </section>
 </template>
 
 <script>

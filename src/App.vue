@@ -4,7 +4,7 @@
 
     
     <transition :name="transitionName" mode="out-in">
-      <router-view id="content" class="container"/>
+      <router-view id="content" class="container-fluid"/>
     </transition> 
     
 

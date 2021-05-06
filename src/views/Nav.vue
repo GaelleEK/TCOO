@@ -6,7 +6,8 @@
                 <a id="logo">GEOC<span><img src="../assets/logo.svg" class="icon is-small"></span>DE</a>
             </router-link> 
             <div id="logout" class="navbar-item is-hidden-desktop">
-                <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                <router-link to="/" class="buttontest" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                <!-- <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link> -->
                 <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
                 <a role="button" :class="navbarBurger" @click="toggleMenu" >
                     <span aria-hidden="true"></span>

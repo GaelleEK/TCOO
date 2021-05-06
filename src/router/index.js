@@ -17,15 +17,15 @@ const routes = [
     name: 'test',
     component: () => import(/* webpackChunkName: "test" */ '../components/tests/TestAnim.vue')
   },
-  {
-    path: '/adresse-2',
-    name: 'adresse-2',
-    component: () => import(/* webpackChunkName: "test" */ '../components/HomeAdresse.vue')
-  },
+  // {
+  //   path: '/adresse-2',
+  //   name: 'adresse-2',
+  //   component: () => import(/* webpackChunkName: "test" */ '../components/HomeAdresse.vue')
+  // },
   {
     path: '/adresse',
     name: 'Adresse',
-    component: () => import(/* webpackChunkName: "adresse" */ '../components/Adresse.vue'),
+    component: () => import(/* webpackChunkName: "adresse" */ '../components/HomeAdresse.vue'),
     meta: { requiresAuth: true }
   },
   {

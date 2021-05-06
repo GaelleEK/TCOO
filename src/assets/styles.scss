@@ -5,7 +5,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 
-@import "/home/stagiaire1/code/coo-gps/project-gps/node_modules/vue2-animate/src/sass/vue2-animate.scss";
+@import "../node_modules/vue2-animate/src/sass/vue2-animate.scss";
+
 
 $body-line-height: 3;
 
@@ -35,7 +36,7 @@ $custom-colors: (
 
 $title-color: $red;
 $text: $grey-dark;
-$button-color: $blue;
+$button-color: $red;
 
 $input-placeholder-color: $grey-dark;
 
@@ -110,8 +111,8 @@ html, body {
 }
 section#content {
     min-height: 85vh;
-    padding-top: 9em;
-    padding-bottom: 8em;
+    // padding-top: 9em;
+    // padding-bottom: 8em;
 }
 div#vanta {
     position: absolute;
@@ -131,7 +132,6 @@ a#logo{
 
 // Test button
 
-  
 %test {
   position: absolute;
   content: '';
@@ -141,56 +141,104 @@ a#logo{
 $colorFontButton: $grey-invert;
 $colorButtonCustom: $red;
 
-.buttontest { 
-    display: inline-block; 
-    padding: 10px 20px;
-    color: $colorFontButton;
-    position: relative;
-    //top: 10vh;
-    //left: 15%;
-    //transform: translate(-50%, -50%);
-    vertical-align: middle;
-    text-decoration: none;
-    font-size: 100%;
-    transition: all .5s;
-    background-color: $colorButtonCustom;
+// .buttontest { 
+//     display: inline-block; 
+//     padding: 10px 20px;
+//     color: $colorFontButton;
+//     position: relative;
+//     //top: 10vh;
+//     //left: 15%;
+//     //transform: translate(-50%, -50%);
+//     vertical-align: middle;
+//     text-decoration: none;
+//     font-size: 100%;
+//     transition: all .5s;
+//     background-color: $colorButtonCustom;
 
-    &:before {
-    @extend %test;
-        bottom: -15px;
-        height: 15px;
-        width: 100%;
-        left: 8px;
-        transform: skewX(45deg);
-        background-color: darken($colorButtonCustom, 20%);
-    }
+//     &:before {
+//     @extend %test;
+//         bottom: -15px;
+//         height: 15px;
+//         width: 100%;
+//         left: 8px;
+//         transform: skewX(45deg);
+//         background-color: darken($colorButtonCustom, 20%);
+//     }
 
-    &::after {
-        @extend %test;
-        right: -15px;
-        height: 100%;
-        width: 15px;
-        bottom: -8px;
-        transform: skewY(45deg);
-        background-color: darken($colorButtonCustom, 30%);
-    }
+//     &::after {
+//         @extend %test;
+//         right: -15px;
+//         height: 100%;
+//         width: 15px;
+//         bottom: -8px;
+//         transform: skewY(45deg);
+//         background-color: darken($colorButtonCustom, 30%);
+//     }
 
-    &:hover {
-        margin-left: 10px;
-        margin-top: 10px;
-        &::before {
-            bottom: -5px;
-            height: 5px;
-            left: 3px;
-        }
+//     &:active {
         
-    &::after {
-            right: -5px;
-            width: 5px;
-            bottom: -3px;
-        }	
-    }
-}
+
+//         margin-left: 10px;
+//         margin-top: 10px;
+//         &::before {
+//             bottom: -5px;
+//             height: 5px;
+//             left: 3px;
+//         }
+        
+//         &::after {
+//             right: -5px;
+//             width: 5px;
+//             bottom: -3px;
+//         }	
+//     }
+   
+// }
+
+
+.pushable {
+    background: darken($red, 20%);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+  }
+  .front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: $red;
+    color: $grey-invert;
+    transform: translateY(-6px);
+    transition:
+      transform
+      600ms
+      cubic-bezier(.3, .7, .4, 1);
+  }
+
+  .pushable:active .front {
+    transform: translateY(-2px);
+  }
+  //pour ne pas avoir de contour lors du focus si appliqué à une balise button 
+  .pushable:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  .pushable:hover > .front {
+    //   transform: translateY(-6px);
+    //   transition:
+    //   transform
+    //   250ms
+    //   cubic-bezier(.3, .7, .4, 1.5);
+  }
+
+  .pushable:active .front {
+    transform: translateY(-2px);
+    transition: transform 34ms;
+  }
+
 /// slide effet router-view
 .slideRight-enter-active {
     @extend .slideInRight;
