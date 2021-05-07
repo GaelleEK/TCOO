@@ -26,10 +26,13 @@
                 </div>
             </div>
         </div>
+        {{ test }}{{ itemStorage }}{{ rep.data }}
     </section>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+const axios = require('axios')
 export default {
     name: 'Login',
     //* initialisation des variables utilisées par le composant login récupérés par l'input et le message d'erreur vide *//
@@ -40,35 +43,35 @@ export default {
                 password: ''
             },
             errorMessage: '',
-            account: {
-                username: 'test',
-                password: 'password'
-            }
+            
+            test: localStorage.getItem('auth-token') ? 'yes' : 'no',
+            itemStorage: localStorage.getItem('auth-token'),
+            reponse:''
         }
     },
     methods: {
         //* méthode appelé lors du click sur le bouton login vérifie si le mot de passe correspond aux variables en fonction on modif le message d'erreur *//
         login() {
-            // vérification de localstorage pour auth auto mais ne fonctionne pas :'-( 
-            if (localStorage.getItem('auth')) {
-                this.$store.dispatch("setAuthenticated", true)
+        
+            //vérification de localstorage pour auth auto mais ne fonctionne pas :'-( 
+            if (localStorage.getItem('auth-token')) {
                 this.$router.replace({ path: '/adresse' })
-                //localStorage.setItem('auth', true)
+                
             } else {
                 if (this.input.username != '' && this.input.password != '') {
-                    if (this.input.username === this.account.username && this.input.password === this.account.password) {
-                        this.$store.dispatch("setAuthenticated", true)
-                        localStorage.setItem('auth', true)
+                    
+                        this.$store.dispatch("getAuthenticated", this.input)
                         this.$router.replace({ path: '/adresse' })
+                        
                     } else {
                         this.errorMessage = "Le nom et/ou le mot de passe sont incorrects"
                     }
-                } else {
-                    this.errorMessage = "Vous n'êtes pas enregistré"
-                }
             }
-        }
-        
+        } 
+    
+    },
+    computed: {
+        ...mapState(['rep'])
     },
     directives: {
         // permet de mettre le focus sur input name a l arrivée sur la page
@@ -77,7 +80,9 @@ export default {
                 el.focus()
             }
         }
-    }
+    },
+    
+    
 }
 </script>
 <style lang="scss">

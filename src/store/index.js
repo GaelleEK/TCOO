@@ -21,6 +21,10 @@ async function getCoo(text) {
   const reponse = await axios.get(`https://api.torop.net/cartographie/geocode?adresse=${text}`)
   return reponse.data
 }
+async function getAuth(item) {
+  const reponse = await axios.post('https://api.torop.net/auth/login', { login: item.username, password: item.password })
+    return reponse
+}
 
 function addCooToAdresse(lat, lng, adresse) {
   adresse.lat = lat
@@ -28,13 +32,13 @@ function addCooToAdresse(lat, lng, adresse) {
   return adresse
 }
 
-
 export default new Vuex.Store({
   name: 'store',
   state: {
     adresses: [],
     authenticated: false,
-    errors: []
+    errors: [],
+    rep: {}
   },
   getters: {
     getAdresses: state => {
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     getErrors: state =>  {
       return state.errors
+    },
+    getRep: state => {
+      return state.rep
     }
   },
   mutations: {
@@ -91,15 +98,35 @@ export default new Vuex.Store({
         }
       }
     },
-    SET_AUTHENTICATED(state, authenticated) {
-      if (authenticated == false) {
-        state.authenticated = false
-      } else {
-        state.authenticated = true
-      }
-    },
     DELETE_ERRORS(state) {
       state.errors = []
+    },
+    SET_AUTHENTICATED(state, item) {
+        if (item == false) {
+          state.authenticated = false
+        } else {
+          state.authenticated = true
+        }
+    },
+    GET_AUTHENTICATED(state, item) {
+      console.log('1')
+        getAuth(item).then((reponse) => { 
+          if(state.rep.success) {
+            state.authenticated = true
+            localStorage.setItem('auth-token', reponse.token)
+          } else {
+            state.authenticated = false
+          }
+          state.rep = reponse.data 
+          console.log('2')
+        })
+        console.log('3')
+      
+      //console.log(state.authenticated, state.rep)
+              
+    },
+    ADD_ERROR(state, item) {
+      state.errors.push(item)
     }
   },
   actions: {
@@ -117,6 +144,12 @@ export default new Vuex.Store({
     }, 
     deleteErrors(context) {
       context.commit('DELETE_ERRORS')
+    },
+    getAuthenticated(context, item) {
+      context.commit('GET_AUTHENTICATED', item)
+    },
+    addError(context, error) {
+      context.commit('ADD_ERROR', error)
     }
   }
 })

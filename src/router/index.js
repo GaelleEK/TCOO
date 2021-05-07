@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/test',
     name: 'test',
-    component: () => import(/* webpackChunkName: "test" */ '../components/tests/TestAnim.vue')
+    component: () => import(/* webpackChunkName: "test" */ '../views/UserHome.vue')
   },
   // {
   //   path: '/adresse-2',
@@ -58,7 +58,7 @@ router.beforeEach((to, from, next) => {
     if (!store.state.authenticated) {
       next({ name: 'Login' })
     } else {
-      next()
+      next({ name: 'Adresse' })
     }
   } else {
     next()

@@ -17,9 +17,9 @@
 
 <script>
 import InputAdresse from './InputAdresse.vue'
-//import ListAdresse from './ListAdresse.vue'
 import UploadAdresses from './UploadAdresses.vue'
 const ListAdresse = () => import(/*webpackChunkName: "ListAdresse" */ './ListAdresse.vue')
+
 export default {
     name: 'HomeAdresse',
     components: { InputAdresse, ListAdresse, UploadAdresses },

@@ -72,7 +72,7 @@ export default {
     methods: {
         logout() {
             this.$store.dispatch("setAuthenticated", false)
-            localStorage.setItem('auth', false)
+            localStorage.setItem('auth-token', false)
         },
         toggleMenu() {
             if(!this.navbarBurger['is-active'] && !this.navbarMenu['is-active']) {

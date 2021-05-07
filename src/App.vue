@@ -3,7 +3,7 @@
     <Navigation/>
 
     
-    <transition :name="transitionName" mode="out-in">
+    <transition :name="slideContent" mode="out-in">
       <router-view id="content" class="container-fluid"/>
     </transition> 
     
@@ -25,13 +25,13 @@ export default {
   data() {
    return {
       localStorage: localStorage.getItem('auth'),
-      transitionName: 'slideRight'
+      slideContent: 'slideRight'
     }
   },
   beforeRouteUpdate (to, from, next) {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
-    this.transitionName = toDepth < fromDepth ? 'slideLeft' : 'slideRight'
+    this.slideContent = toDepth < fromDepth ? 'slideLeft' : 'slideRight'
     next()
   },
   mounted() {

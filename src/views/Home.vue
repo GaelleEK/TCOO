@@ -34,9 +34,9 @@ export default {
       btnOps: {
         type: "triangle",
         easing: "easeOutQuart",
-        size: 4,
-        particlesAmountCoefficient: 4,
-        oscillationCoefficient: 2,
+        size: 6,
+        particlesAmountCoefficient: 6,
+        oscillationCoefficient: 10,
         color: function () {
           return  "#b31254";
         },
