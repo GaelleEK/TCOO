@@ -21,6 +21,12 @@ async function getCoo(text) {
   const reponse = await axios.get(`https://api.torop.net/cartographie/geocode?adresse=${text}`)
   return reponse.data
 }
+
+async function getUserInfos(token) {
+  const reponse = await axios.get(`https://api.torop.net/user/me`, { headers: { Authorization: 'Bearer' + token }})
+    return reponse
+}
+
 async function getAuth(item) {
   const reponse = await axios.post('https://api.torop.net/auth/login', { login: item.username, password: item.password })
     return reponse
@@ -36,27 +42,27 @@ export default new Vuex.Store({
   name: 'store',
   state: {
     adresses: [],
-    authenticated: false,
     errors: [],
-    rep: {}
+    token: '',
+    user: {},
+    userInfo: {}
   },
   getters: {
     getAdresses: state => {
       return state.adresses
     },
-    isAuthenticated: state => {
-      return state.authenticated
-    },
     getErrors: state =>  {
       return state.errors
     },
-    getRep: state => {
-      return state.rep
-    }
+    getToken: state => {
+      return state.token
+    },
+    
   },
+  //************** MUTATIONS *************************/
   mutations: {
+    //**********ADRESSE****************//
     ADD_ADRESSE(state, item) {
-      // TODO: voir comment gérer l'emission d'erreur pour adresse valide ou invalide
       let adresse 
       //si state adresses vide alors j enregistre adresse
       if(state.adresses.length == 0) {
@@ -88,6 +94,7 @@ export default new Vuex.Store({
           .then(reponse => {
             addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, item)
         })
+          .catch(error => state.errors.push(error))
       } else {
         const adresses = state.adresses
         for(let i = 0; i < adresses.length; i++) {
@@ -98,58 +105,67 @@ export default new Vuex.Store({
         }
       }
     },
+    //**********ERRORS****************//
     DELETE_ERRORS(state) {
       state.errors = []
     },
-    SET_AUTHENTICATED(state, item) {
-        if (item == false) {
-          state.authenticated = false
-        } else {
-          state.authenticated = true
-        }
-    },
-    GET_AUTHENTICATED(state, item) {
-      console.log('1')
-        getAuth(item).then((reponse) => { 
-          if(state.rep.success) {
-            state.authenticated = true
-            localStorage.setItem('auth-token', reponse.token)
-          } else {
-            state.authenticated = false
-          }
-          state.rep = reponse.data 
-          console.log('2')
-        })
-        console.log('3')
-      
-      //console.log(state.authenticated, state.rep)
-              
-    },
     ADD_ERROR(state, item) {
       state.errors.push(item)
-    }
+    },
+    //**********TOKEN****************//
+    GET_TOKEN(state, item) {
+      getAuth(item)
+        .then(reponse => { 
+          //console.log(reponse)
+          state.token = reponse.data.data.token
+          state.user = reponse.config.data
+        }) 
+        .catch(error => {
+          state.errors.push(error)
+        }) 
+    },
+    REMOVE_TOKEN(state) {
+      state.token = {}
+    },
+   //**********USER****************//
+    GET_USER_INFO(state) {
+      if(state.token!= '') {
+        getUserInfos(state.token) 
+          .then(reponse => {
+            console.log(reponse)
+            state.userInfos = reponse
+          })
+          .catch(error => {
+            state.errors.push(error)
+          }) 
+            }
+
+      }
   },
+  //************** ACTIONS *************************/
   actions: {
+    //**********ADRESSE****************//
     addAdresse(context, adresse) {
       context.commit('ADD_ADRESSE', adresse)
     },
-    deleteAdresse(context, adresse) {
-      context.commit('REMOVE_ADRESSE', adresse) 
-    },
-    updateAdresses(context, adresse) {
-      context.commit('UPDATE_ADRESSES', adresse)
-    },
-    setAuthenticated(context, authenticated) {
-      context.commit('SET_AUTHENTICATED', authenticated)
-    }, 
-    deleteErrors(context) {
-      context.commit('DELETE_ERRORS')
-    },
-    getAuthenticated(context, item) {
-      context.commit('GET_AUTHENTICATED', item)
-    },
+    //**********ERRORS****************//
     addError(context, error) {
       context.commit('ADD_ERROR', error)
+    },
+    deleteError(context) {
+      context.commit('DELETE_ERRORS')
+    },
+    //**********TOKEN****************//
+    getToken(context, item) {
+      context.commit('GET_TOKEN', item)
+    },
+    removeToken(context) {
+      context.commit('REMOVE_TOKEN')
+    },
+    //**********USER****************//
+    getUserInfo(context) {
+      context.commit('GET_USER_INFO')
     }
+
   }
 })

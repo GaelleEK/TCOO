@@ -13,15 +13,16 @@ const routes = [
     component: Home,
   },
   {
+    path: '/userHome',
+    name: 'userHome',
+    component: () => import(/* webpackChunkName: "userHome" */ '../views/UserHome.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/test',
     name: 'test',
     component: () => import(/* webpackChunkName: "test" */ '../views/UserHome.vue')
   },
-  // {
-  //   path: '/adresse-2',
-  //   name: 'adresse-2',
-  //   component: () => import(/* webpackChunkName: "test" */ '../components/HomeAdresse.vue')
-  // },
   {
     path: '/adresse',
     name: 'Adresse',
@@ -42,7 +43,13 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
+  {
+    //si on saisit  une url non mappé renvoie sur home
+    path:'*',
+    redirect: '/'
+  }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
@@ -55,10 +62,10 @@ router.beforeEach((to, from, next) => {
   //console.log(`navigue de ${from.name} vers ${to.name}`)
   //console.log('store : ', store.getters.isAuthenticated ,'tomatched : ' ,to.matched,'state : ', store.state)
   if (to.meta.requiresAuth) {
-    if (!store.state.authenticated) {
+    if (!store.state.token || !localStorage.getItem('auth-token')) {
       next({ name: 'Login' })
     } else {
-      next({ name: 'Adresse' })
+      next()
     }
   } else {
     next()

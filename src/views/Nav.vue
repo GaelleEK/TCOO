@@ -6,7 +6,7 @@
                 <a id="logo">GEOC<span><img src="../assets/logo.svg" class="icon is-small"></span>DE</a>
             </router-link> 
             <div id="logout" class="navbar-item is-hidden-desktop">
-                <router-link to="/" class="buttontest" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                <router-link to="/" class="buttontest" v-if="getToken" @click="logout">Logout</router-link>
                 <!-- <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link> -->
                 <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
                 <a role="button" :class="navbarBurger" @click="toggleMenu" >
@@ -24,12 +24,15 @@
                     <router-link to="/adresse" @click="toggleMenu" exact-active-path replace>Adresse</router-link>
                 </div>
                 <div class="navbar-item">
+                    <router-link to="/userHome" @click="toggleMenu">UserHome</router-link>
+                </div>
+                <div class="navbar-item">
                     <router-link to="/about" @click="toggleMenu" exact-path>About</router-link> 
                 </div>
             </div>
             <div class="navbar-end is-hidden-touch">
                 <div class="navbar-item">
-                    <router-link to="/" class="button is-small is-outlined" v-if="isAuthenticated" @click="logout">Logout</router-link>
+                    <router-link to="/" class="button is-small is-outlined" v-if="getToken" @click="logout">Logout</router-link>
                     <router-link to="/login" class="button is-small is-outlined" v-else @click="logout">Login</router-link>
                 </div>
             </div>
@@ -71,8 +74,8 @@ export default {
     },
     methods: {
         logout() {
-            this.$store.dispatch("setAuthenticated", false)
-            localStorage.setItem('auth-token', false)
+            this.$store.dispatch('removeToken')
+            localStorage.removeItem('auth-token')
         },
         toggleMenu() {
             if(!this.navbarBurger['is-active'] && !this.navbarMenu['is-active']) {
@@ -106,7 +109,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['isAuthenticated']),
+        ...mapGetters(['getToken']),
     },
     directives: {
         scroll: {

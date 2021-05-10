@@ -23,6 +23,14 @@ const ListAdresse = () => import(/*webpackChunkName: "ListAdresse" */ './ListAdr
 export default {
     name: 'HomeAdresse',
     components: { InputAdresse, ListAdresse, UploadAdresses },
+    // beforeRouteEnter(to, from, next) {
+    //     console.log(to, from, next)
+    //     if (vm.$store.state.token) {
+    //         next()
+    //     } else {
+    //         next('/login')
+    //     }
+    // }
 }
 </script>
 <style>

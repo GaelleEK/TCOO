@@ -26,12 +26,12 @@
                 </div>
             </div>
         </div>
-        {{ test }}{{ itemStorage }}{{ rep.data }}
     </section>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+
+import { mapGetters, mapState } from 'vuex'
 const axios = require('axios')
 export default {
     name: 'Login',
@@ -43,35 +43,30 @@ export default {
                 password: ''
             },
             errorMessage: '',
-            
-            test: localStorage.getItem('auth-token') ? 'yes' : 'no',
-            itemStorage: localStorage.getItem('auth-token'),
-            reponse:''
         }
     },
     methods: {
         //* méthode appelé lors du click sur le bouton login vérifie si le mot de passe correspond aux variables en fonction on modif le message d'erreur *//
         login() {
-        
-            //vérification de localstorage pour auth auto mais ne fonctionne pas :'-( 
-            if (localStorage.getItem('auth-token')) {
-                this.$router.replace({ path: '/adresse' })
-                
+            if (this.input.username != '' && this.input.password != '') {
+                this.$store.dispatch('getToken', this.input)
+                this.$store.dispatch('getUserInfo')
             } else {
-                if (this.input.username != '' && this.input.password != '') {
-                    
-                        this.$store.dispatch("getAuthenticated", this.input)
-                        this.$router.replace({ path: '/adresse' })
-                        
-                    } else {
-                        this.errorMessage = "Le nom et/ou le mot de passe sont incorrects"
-                    }
+                this.errorMessage = "Le nom et/ou le mot de passe sont incorrects"
             }
         } 
-    
+    },
+    watch: {
+        token: function() {
+            if(this.token != '') {
+                this.$router.replace('/adresse')
+                localStorage.setItem('auth-token', this.token)
+            }
+        }
     },
     computed: {
-        ...mapState(['rep'])
+        ...mapState(['token']),
+        ...mapGetters(['getToken'])
     },
     directives: {
         // permet de mettre le focus sur input name a l arrivée sur la page
