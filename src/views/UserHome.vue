@@ -6,10 +6,8 @@
     <p>Login : {{ userInfo['login'] }}</p>
     <p>Nom : {{ userInfo['nom'] }}</p>
     <p>Prénom : {{ userInfo['prenom'] }}</p>
-    <p>Mail : {{ userInfo['mail'] }}</p>
-    <p>Dernière connexion : {{  }}</p>
-    <p>info: {{ userInfo }}</p>
-    <!-- <button @click='getUserInfos'>test</button> -->
+    <p>Mail : {{ userInfo['email'] }}</p>
+    <!-- <p>info: {{ userInfo }}</p> -->
 </section>
 </template>
 
@@ -24,10 +22,7 @@ export default {
     },
     computed: {
        ...mapState(['token', 'userInfo'])
-    },
-    mounted() {
-        
-    }       
+    },  
     
 }
 </script>

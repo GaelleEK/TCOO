@@ -41,7 +41,7 @@
           <p>Liste des adresses invalides :</p>
           <button class="delete is-small" @click="deleteErrors"></button>
         </div>
-
+      
         <transition-group
           enter-active-class="bounceInLeft"
           leave-active-class="bounceOutRight"

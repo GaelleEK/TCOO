@@ -3,7 +3,6 @@
         <div class="container">
             <div class="box has-background-grey-light">
                 <h1 class="title is-2">Connexion</h1>
-                
                 <div class="field">
                     <div class="control has-icons-left has-icons-right">
                         <input class="input" type="text" name="username" v-model="input.username" placeholder="Entrez votre nom" v-focus>
@@ -51,7 +50,9 @@ export default {
         //* méthode appelé lors du click sur le bouton login vérifie si le mot de passe correspond aux variables en fonction on modif le message d'erreur *//
         login() {
             if (this.input.username != '' && this.input.password != '') {
-                this.$store.dispatch('getAuthS', this.input)
+                //console.log(this.input)
+                const input = this.input
+                this.$store.dispatch('getAuthS', input)
             } else {
                 this.errorMessage = "Le nom et/ou le mot de passe sont incorrects"
             }
@@ -61,7 +62,7 @@ export default {
     watch: {
         token: function() {
             if(this.token != '') {
-                console.log(this.token)
+                //console.log(this.token)
                 this.$store.dispatch('login', this.token)
                 this.$router.replace('/adresse')
                 //localStorage.setItem('auth-token', this.token)
@@ -70,7 +71,6 @@ export default {
     },
     computed: {
         ...mapState(['token', 'errors']),
-        //...mapGetters(['getToken', 'getErrors'])
     },
     directives: {
         // permet de mettre le focus sur input name a l arrivée sur la page

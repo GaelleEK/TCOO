@@ -34,7 +34,7 @@ async function getUserInfos(item) {
     return headers
   })
   const reponse = http.get('/users/me')
-  console.log(reponse)
+  //console.log(reponse)
   return reponse
 }
 
@@ -56,7 +56,8 @@ export default new Vuex.Store({
     adresses: [],
     errors: [],
     token: '',
-    userInfo: {}
+    userInfo: {},
+    errorsAxios: [],
   },
   getters: {
     getAdresses: state => {
@@ -99,6 +100,7 @@ export default new Vuex.Store({
       state.adresses = state.adresses.filter(adresse => adresse.id !== item.id)
     },
     UPDATE_ADRESSES(state, item) {
+      //console.log(item)
       if(item) {
         getCoo(item.text)
           .then(reponse => {
@@ -122,6 +124,9 @@ export default new Vuex.Store({
     ADD_ERROR(state, item) {
       state.errors.push(item)
     },
+    ADD_ERROR_AXIOS(state, item) {
+      state.errorsAxios.push(item)
+    },
     //**********TOKEN****************//
     REMOVE_TOKEN(state) {
       state.token = {}
@@ -140,30 +145,33 @@ export default new Vuex.Store({
     addAdresse(context, adresse) {
       context.commit('ADD_ADRESSE', adresse)
     },
+    updateAdresses(context, adresse) {
+      context.commit('UPDATE_ADRESSES', adresse)
+    },
     //**********ERRORS****************//
     addError(context, error) {
       context.commit('ADD_ERROR', error)
     },
-    deleteError(context) {
+    deleteErrors(context) {
       context.commit('DELETE_ERRORS')
     },
     //**********TOKEN/USER****************//
     async getAuthS({ commit }, item) {
       getAuth(item)
           .then(reponse => { 
-            console.log(reponse)
+            //console.log(reponse)
             commit('SET_TOKEN', reponse.data.data.token)
           }) 
-          // .catch(error => {
-          //   commit('ADD_ERROR', error)
-          //   //state.errors.push(error)
-          // })
+          .catch(error => {
+            commit('ADD_ERROR_AXIOS', error)
+            //state.errors.push(error)
+          })
     },
     async login({ commit, dispatch, state }) {
         await dispatch('getAuthS')
         getUserInfos(state.token)
           .then(reponse => {
-            console.log(reponse)
+            //console.log(reponse)
             commit('SET_USER_INFO', reponse.data.data)
           })
           // .catch(error => {
