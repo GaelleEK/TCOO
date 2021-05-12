@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
   //console.log(`navigue de ${from.name} vers ${to.name}`)
   //console.log('store : ', store.getters.isAuthenticated ,'tomatched : ' ,to.matched,'state : ', store.state)
   if (to.meta.requiresAuth) {
-    if (!store.state.token || !localStorage.getItem('auth-token')) {
+    if (!store.state.token) {
       next({ name: 'Login' })
     } else {
       next()

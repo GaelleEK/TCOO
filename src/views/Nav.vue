@@ -87,6 +87,7 @@ export default {
             } else {
                 this.navbarBurger['is-active'] = false
                 this.navbarMenu['is-active'] = false
+                this.navbarBurger['aria-expanded'] = false
             }
         },
         handleScroll() {

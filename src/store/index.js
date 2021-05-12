@@ -1,6 +1,8 @@
 import Vue from 'vue'
-import Vuex, { Store } from 'vuex'
-
+import Vuex from 'vuex'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
 Vue.use(Vuex)
 
 let id = 1
@@ -15,17 +17,27 @@ function createAdresse(text) {
   }
 }
 
-const axios = require('axios')
-
 async function getCoo(text) {
   const reponse = await axios.get(`https://api.torop.net/cartographie/geocode?adresse=${text}`)
   return reponse.data
 }
 
-async function getUserInfos(token) {
-  const reponse = await axios.get(`https://api.torop.net/user/me`, { headers: { Authorization: 'Bearer' + token }})
-    return reponse
+async function getUserInfos(item) {
+  const http = axios.create({
+    baseURL: 'https://api.torop.net',
+    headers: {
+      Authorization: `Bearer ${item}`
+    }
+  })
+  http.interceptors.request.use(function(headers) { 
+    headers['Authorization'] = `Bearer ${item}`
+    return headers
+  })
+  const reponse = http.get('/users/me')
+  console.log(reponse)
+  return reponse
 }
+
 
 async function getAuth(item) {
   const reponse = await axios.post('https://api.torop.net/auth/login', { login: item.username, password: item.password })
@@ -44,7 +56,6 @@ export default new Vuex.Store({
     adresses: [],
     errors: [],
     token: '',
-    user: {},
     userInfo: {}
   },
   getters: {
@@ -56,8 +67,7 @@ export default new Vuex.Store({
     },
     getToken: state => {
       return state.token
-    },
-    
+    }
   },
   //************** MUTATIONS *************************/
   mutations: {
@@ -113,34 +123,16 @@ export default new Vuex.Store({
       state.errors.push(item)
     },
     //**********TOKEN****************//
-    GET_TOKEN(state, item) {
-      getAuth(item)
-        .then(reponse => { 
-          //console.log(reponse)
-          state.token = reponse.data.data.token
-          state.user = reponse.config.data
-        }) 
-        .catch(error => {
-          state.errors.push(error)
-        }) 
-    },
     REMOVE_TOKEN(state) {
       state.token = {}
     },
+    SET_TOKEN(state, token) {
+      state.token = token
+    },
    //**********USER****************//
-    GET_USER_INFO(state) {
-      if(state.token!= '') {
-        getUserInfos(state.token) 
-          .then(reponse => {
-            console.log(reponse)
-            state.userInfos = reponse
-          })
-          .catch(error => {
-            state.errors.push(error)
-          }) 
-            }
-
-      }
+    SET_USER_INFO(state, item) {
+      state.userInfo = item
+    }
   },
   //************** ACTIONS *************************/
   actions: {
@@ -155,17 +147,29 @@ export default new Vuex.Store({
     deleteError(context) {
       context.commit('DELETE_ERRORS')
     },
-    //**********TOKEN****************//
-    getToken(context, item) {
-      context.commit('GET_TOKEN', item)
+    //**********TOKEN/USER****************//
+    async getAuthS({ commit }, item) {
+      getAuth(item)
+          .then(reponse => { 
+            console.log(reponse)
+            commit('SET_TOKEN', reponse.data.data.token)
+          }) 
+          // .catch(error => {
+          //   commit('ADD_ERROR', error)
+          //   //state.errors.push(error)
+          // })
     },
-    removeToken(context) {
-      context.commit('REMOVE_TOKEN')
+    async login({ commit, dispatch, state }) {
+        await dispatch('getAuthS')
+        getUserInfos(state.token)
+          .then(reponse => {
+            console.log(reponse)
+            commit('SET_USER_INFO', reponse.data.data)
+          })
+          // .catch(error => {
+          //   commit('ADD_ERROR', error)
+          //   //state.errors.push(error)
+          // })
     },
-    //**********USER****************//
-    getUserInfo(context) {
-      context.commit('GET_USER_INFO')
-    }
-
   }
 })

@@ -26,13 +26,15 @@
                 </div>
             </div>
         </div>
+        <div v-show="token">{{ token }}</div>
+        <div v-for="(index, error) in errors" :key="error.index">{{ error[index] }}</div>
     </section>
 </template>
 
 <script>
 
-import { mapGetters, mapState } from 'vuex'
-const axios = require('axios')
+import { mapState } from 'vuex'
+
 export default {
     name: 'Login',
     //* initialisation des variables utilisées par le composant login récupérés par l'input et le message d'erreur vide *//
@@ -49,24 +51,26 @@ export default {
         //* méthode appelé lors du click sur le bouton login vérifie si le mot de passe correspond aux variables en fonction on modif le message d'erreur *//
         login() {
             if (this.input.username != '' && this.input.password != '') {
-                this.$store.dispatch('getToken', this.input)
-                this.$store.dispatch('getUserInfo')
+                this.$store.dispatch('getAuthS', this.input)
             } else {
                 this.errorMessage = "Le nom et/ou le mot de passe sont incorrects"
             }
-        } 
+        }, 
+    
     },
     watch: {
         token: function() {
             if(this.token != '') {
+                console.log(this.token)
+                this.$store.dispatch('login', this.token)
                 this.$router.replace('/adresse')
-                localStorage.setItem('auth-token', this.token)
+                //localStorage.setItem('auth-token', this.token)
             }
         }
     },
     computed: {
-        ...mapState(['token']),
-        ...mapGetters(['getToken'])
+        ...mapState(['token', 'errors']),
+        //...mapGetters(['getToken', 'getErrors'])
     },
     directives: {
         // permet de mettre le focus sur input name a l arrivée sur la page
@@ -76,6 +80,9 @@ export default {
             }
         }
     },
+    mounted() {
+        //console.log(this.getToken)
+    }
     
     
 }
