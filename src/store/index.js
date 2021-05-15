@@ -8,7 +8,7 @@ Vue.use(Vuex)
 let id = 1
 
 function createAdresse(text) {
-  text.toString().replace(/\n|\r/g, '')
+  //text.toString().replace(/\n|\r/g, '')
   return {
     id: id++,
     text,
@@ -83,9 +83,7 @@ export default new Vuex.Store({
     UPDATE_ADRESSES(state, adresseUpdated) {
       //console.log(adresseUpdated)
       //state.adresses.filter(adresse => adresse.id == adresseUpdated.id)
-      let adresse = state.adresses.filter(adresse => adresse.id === adresseUpdated.id)
-      var a = [...adresse]
-      console.log(a, 'test')
+      state.adresses.filter(adresse => adresse.id === adresseUpdated.id)
       //console.log(adresse)
       //state.adresses.push(adresseUpdated)
     },
@@ -132,27 +130,27 @@ export default new Vuex.Store({
           } else {
             //console.log('adresse invalide')
             let error = { type: 'adresse invalide', item }
-            commit('ADD_ERROR_AXIOS', error)
+            commit('ADD_ERROR', error)
           }
         }
       }
     },
-    async updateAdresses({ state, commit }, item) {
-      await dispatch('addAdresse')
-      //let adresse
+    async updateAdresses({ state, commit, dispatch }, item) {
+      //await dispatch('addAdresse')
+      const adresses = state.adresses
       if(item) {
         getCoo(item.text)
           .then(reponse => {
-            adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, item)
+            let adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, item)
             commit('UPDATE_ADRESSES', adresse)
         })
-          .catch(error => state.errors.push(error))
+          //.catch(error => state.errors.push(error))
       } else {
-        const adresses = state.adresses
         for(let i = 0; i < adresses.length; i++) {
+          //const adresse = adresses[i]
           getCoo(adresses[i].text)
             .then(reponse => {
-              adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, adresses[i])
+              let adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, adresses[i])
               commit('UPDATE_ADRESSES', adresse)
           })
         }
