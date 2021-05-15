@@ -1,9 +1,9 @@
 <template>
-    <section class="tile is-ancestor box has-background-grey-light" :key="adresse.id" :adresse="adresse">
-       
-        <div class="tile is-parent level">
+    <section class="tile is-ancestor box has-background-grey-light level" :key="adresse.id" :adresse="adresse">
+        <button class="delete has-background-white is-pulled-right is-hidden-tablet" :adresse="adresse" @click="deleteAdresse"></button>
+        <div class="tile is-parent">
             
-            <p class="level-left">{{ adresse.id }}</p>
+            <p class="level-left is-hidden-touch">{{ adresse.id }}</p>
 
             <div class="tile is-child">
                 <p class="level-item has-text-weight-bold">{{ adresse.text }}</p>
@@ -18,11 +18,9 @@
                 <adresse-button-coos><slot name="default"></slot></adresse-button-coos>
             </div>
 
-            <div class="level-right">
-                <button class="delete has-background-white" :adresse="adresse" @click="deleteAdresse"></button>
-            </div>
-            
         </div>
+
+        <button class="delete has-background-white level-right is-hidden-mobile" :adresse="adresse" @click="deleteAdresse"></button>
         
     </section>
 </template>
