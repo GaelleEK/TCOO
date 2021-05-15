@@ -73,49 +73,21 @@ export default new Vuex.Store({
   //************** MUTATIONS *************************/
   mutations: {
     //**********ADRESSE****************//
-    ADD_ADRESSE(state, item) {
-      let adresse 
-      //si state adresses vide alors j enregistre adresse
-      if(state.adresses.length == 0) {
-        adresse = createAdresse(item)
-        state.adresses.push(adresse)
-      } else {
-        // si state adresses a des adresses
-        if(state.adresses.length > 0) {
-          //variable q filtre les adresses identiques
-          let q = state.adresses.filter(adresse => adresse.text == item)
-          if(q.length == 0) {
-            //console.log('adresse valide')
-            adresse = createAdresse(item)
-            state.adresses.push(adresse)
-          } else {
-            //console.log('adresse invalide')
-            let error = { type: 'adresse invalide', item }
-            state.errors.push(error)
-          }
-        }
-      }
+    ADD_ADRESSE(state, adresse) {
+      //console.log('mutation add_adresse', state, adresse)
+      state.adresses.push(adresse)
     },
     REMOVE_ADRESSE(state, item) {
       state.adresses = state.adresses.filter(adresse => adresse.id !== item.id)
     },
-    UPDATE_ADRESSES(state, item) {
-      //console.log(item)
-      if(item) {
-        getCoo(item.text)
-          .then(reponse => {
-            addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, item)
-        })
-          .catch(error => state.errors.push(error))
-      } else {
-        const adresses = state.adresses
-        for(let i = 0; i < adresses.length; i++) {
-          getCoo(adresses[i].text)
-            .then(reponse => {
-              addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, adresses[i])
-          })
-        }
-      }
+    UPDATE_ADRESSES(state, adresseUpdated) {
+      //console.log(adresseUpdated)
+      //state.adresses.filter(adresse => adresse.id == adresseUpdated.id)
+      let adresse = state.adresses.filter(adresse => adresse.id === adresseUpdated.id)
+      var a = [...adresse]
+      console.log(a, 'test')
+      //console.log(adresse)
+      //state.adresses.push(adresseUpdated)
     },
     //**********ERRORS****************//
     DELETE_ERRORS(state) {
@@ -142,11 +114,52 @@ export default new Vuex.Store({
   //************** ACTIONS *************************/
   actions: {
     //**********ADRESSE****************//
-    addAdresse(context, adresse) {
-      context.commit('ADD_ADRESSE', adresse)
+    async addAdresse({ state, commit}, item) {
+      let adresse
+      //si state adresses vide alors j enregistre adresse
+      if(state.adresses.length == 0) {
+        adresse = createAdresse(item)
+        commit('ADD_ADRESSE', adresse)
+      } else {
+        // si state adresses a des adresses
+        if(state.adresses.length > 0) {
+          //variable q filtre les adresses identiques
+          let q = state.adresses.filter(adresse => adresse.text == item)
+          if(q.length == 0) {
+            //console.log('adresse valide')
+            adresse = createAdresse(item)
+            commit('ADD_ADRESSE', adresse)
+          } else {
+            //console.log('adresse invalide')
+            let error = { type: 'adresse invalide', item }
+            commit('ADD_ERROR_AXIOS', error)
+          }
+        }
+      }
     },
-    updateAdresses(context, adresse) {
-      context.commit('UPDATE_ADRESSES', adresse)
+    async updateAdresses({ state, commit }, item) {
+      await dispatch('addAdresse')
+      //let adresse
+      if(item) {
+        getCoo(item.text)
+          .then(reponse => {
+            adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, item)
+            commit('UPDATE_ADRESSES', adresse)
+        })
+          .catch(error => state.errors.push(error))
+      } else {
+        const adresses = state.adresses
+        for(let i = 0; i < adresses.length; i++) {
+          getCoo(adresses[i].text)
+            .then(reponse => {
+              adresse = addCooToAdresse(reponse.data.infos.lat, reponse.data.infos.lng, adresses[i])
+              commit('UPDATE_ADRESSES', adresse)
+          })
+        }
+      }
+    },
+    deleteAdresse(context, adresse) {
+      context.commit('REMOVE_ADRESSE', adresse)
     },
     //**********ERRORS****************//
     addError(context, error) {
@@ -157,15 +170,18 @@ export default new Vuex.Store({
     },
     //**********TOKEN/USER****************//
     async getAuthS({ commit }, item) {
-      getAuth(item)
-          .then(reponse => { 
-            //console.log(reponse)
-            commit('SET_TOKEN', reponse.data.data.token)
-          }) 
-          .catch(error => {
-            commit('ADD_ERROR_AXIOS', error)
-            //state.errors.push(error)
-          })
+      if(item.username && item.password) {
+        getAuth(item)
+            .then(reponse => { 
+              //console.log(reponse)
+              commit('SET_TOKEN', reponse.data.data.token)
+            }) 
+            .catch(error => {
+              commit('ADD_ERROR_AXIOS', error)
+              //state.errors.push(error)
+            })
+
+      }
     },
     async login({ commit, dispatch, state }) {
         await dispatch('getAuthS')
@@ -174,10 +190,10 @@ export default new Vuex.Store({
             //console.log(reponse)
             commit('SET_USER_INFO', reponse.data.data)
           })
-          // .catch(error => {
-          //   commit('ADD_ERROR', error)
-          //   //state.errors.push(error)
-          // })
+          .catch(error => {
+            commit('ADD_ERROR_AXIOS', error)
+            //state.errors.push(error)
+          })
     },
   }
 })
