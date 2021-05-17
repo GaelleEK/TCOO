@@ -32,7 +32,24 @@
         </div>
       </div>
       <div class="level">
-        <div class="level-item box has-background-white has-text-centered">Cliquez pour demander les coordonnées</div>
+        <div class="level-item box has-background-white has-text-centered">
+        <div>
+          <div class="heading">Cliquez pour demander les coordonnées</div>
+          <figure class="image is-256*256">
+            <img src="../assets/images/bouton-coos.jpg">
+          </figure>
+        </div>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-item box has-background-white has-text-centered">
+        <div>
+          <div class="heading">Cliquez pour exporter les données au format excel</div>
+          <figure class="image is-256*256">
+            <img src="../assets/images/bouton-extract.jpg">
+          </figure>
+        </div>
+        </div>
       </div>
     </div>
   </div>
